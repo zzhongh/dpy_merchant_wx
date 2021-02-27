@@ -1,0 +1,142 @@
+<!--index.wxml --> 
+<view class="page">
+  <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading>
+  <modal wx:if="{{showQuantityModal}}" class='update-quantity-modal-view' bindcancel="modalCancel" bindconfirm='modalConfirm'>
+    <view class='update-quantity-title-view'>请输入您要购买的数量</view>
+    <input value='{{selecteEditProductInfo.num}}' type="number" class='update-quantity-input' bindinput='editInput'></input>
+  </modal>
+  <view class='home-header-wrapView'>
+    <view class='home-header-city-wrap-view' bindtap='goToSelectCity'>
+      <image src='../../images/common/location.png' class='message_img'></image>
+      <text class='home-header-text'>{{currentCityName}}</text>
+      <image src='../../images/index/right_white.png' class='location_right_img'></image>
+    </view>
+    <view class='home-header-search-wrap-view' bindtap='goToSearch'>
+      <image src='../../images/index/search_img.png' class='search_icon'></image>
+      <text class='search_text'>请输入商品名称</text>
+    </view>
+    <!-- <view class='home-header-message-wrap-view' bindtap='test'>
+      <image src='../../images/common/message-center.png' class='message_img'></image>
+      <text class='home-header-text'>消息</text>
+      <view wx:if='{{unreadCountIsShow}}' class='user-header-message-point-view'></view>
+    </view> -->
+  </view>
+  <scroll-view style='margin-top:38px;' bindscroll="scrollTopFun">
+  <!-- 轮播图 -->
+    <view class="swiper" style='height:{{swiperH}}' wx:if='{{isShowSwiper}}'>
+      <swiper class="swiper-box" style='height:{{swiperH}};width:100%' indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+            indicator-color="#fff" indicator-active-color="red">
+        <block wx:for-items="{{bannerInfo}}" wx:key="item.id">
+          <!-- <navigator url="../blogList/blogList"> -->
+            <swiper-item>
+              <block wx:if="{{item}}">
+                <image bindtap='goToWebView' data-url='{{item.detailUrl}}' class="imgw" src="{{item.imageUrl}}" style='height:{{swiperH}};width:100%'/>
+              </block>
+              <block wx:else>
+                <image src="../../images/default_pic.png" mode="aspectFill"></image>
+              </block>
+            </swiper-item>
+          <!-- </navigator> -->
+        </block>
+      </swiper>
+    </view>
+    <!-- 分类 -->
+    <view class='category-wrap-view'>
+      <block wx:for='{{categoryInfo}}'  wx:key="{{categoryInfo}}">
+        <view class='category-item' wx:if="{{item}}" bindtap='goToCategory' data-item='{{item}}' data-index='{{index}}'>
+          <image class='img' src="{{item.previewImageURL==''?'../../images/order/img_loading.jpg':item.previewImageURL}}"></image>
+          <text class='category-item-title'>{{item.name}}</text>
+        </view>
+      </block>
+    </view>
+    <view style='width:100%;background-color:#F4F5F7'>
+      <view class=" {{top>130 ? 'topnav' : 'collect_and_recommend_view'}}">
+        <block wx:for='{{modal}}' wx:key='{{item.id}}'>
+          <view class="{{item.isSelected ? 'collect_and_recommend_selected_text' : 'collect_and_recommend_text'}}" 
+            bindtap='modalClick' data-index='{{index}}'>{{item.name}}</view>
+        </block>
+      </view>
+      <block wx:for='{{productList}}' wx:key="item.id" wx:for-index='idx'>
+        <!-- 商品信息 -->
+        <view class='product_list_item' bindtap='gotoProductDetail' data-index='{{idx}}'>
+          <image src='{{item.productPreviewImageURL}}' class='product_list_item_img' wx:if="{{item.productPreviewImageURL!=''&&item.productPreviewImageURL!=null}}"></image>
+          <image src='../../images/order/img_loading.jpg' 
+              class='product_list_item_img' wx:else></image>
+          <view class='product_list_item_product_info' style='width:{{productImgRightWidth}}'>
+            <text class='product_list_item_product_name'>{{item.name}}</text>
+            <view wx:if='{{item.productSpecificationList.length == 1}}' 
+              class='product_list_item_specification_item_name'>{{item.productSpecificationList[0].name}}</view>
+            <view class='product_list_item_price_and_collection'>
+              <view class='product_list_item_product_price_str'>{{item.priceStr}}</view>
+                <view wx:if='{{item.productSpecificationList.length > 1}}' catchtap='setIsShowSpecification' 
+                  data-index='{{idx}}'class='choose_specification_view' >{{item.isShowSpecification ? '收起':'选规格'}}</view>
+                <view class='product_list_item_specification_item_insert_subscribeStock' wx:elif='{{item.productSpecificationList[0].quantity <= 0 }}' 
+                    data-id='{{item.id}}' catchtap='insertSubscribeStock' data-pindex='{{idx}}'>加入到货通知</view>
+                <view class='product_list_item_specification_item_cart_num' wx:else>
+                  <image src='../../images/common/icon_subcart.png' class='product_list_item_specification_item_add_and_sub_img' 
+                      hidden='{{!item.productSpecificationList[0].hasInShoppingCart}}' catchtap='subNum' 
+                      data-hi='{{item.productSpecificationList[0].shoppingCartNum}}'
+                      data-id='{{item.productSpecificationList[0].id}}' data-pIndex='{{idx}}' data-sIndex='0'></image>
+                  <view class='product_list_item_specification_item_input' catchtap='editNum' 
+                      data-id='{{item.productSpecificationList[0].id}}
+                      hidden='{{!item.productSpecificationList[0].hasInShoppingCart}}'data-pindex='{{idx}}' 
+                      data-hi='{{item.productSpecificationList[0].shoppingCartNum}}'
+                      data-sindex='0'>{{item.productSpecificationList[0].shoppingCartNum}}</view>
+                  <image src='../../images/common/icon_addcart.png'               
+                      class='product_list_item_specification_item_add_and_sub_img' catchtap='addNum' 
+                      data-id='{{item.productSpecificationList[0].id}}' 
+                      data-hi='{{item.productSpecificationList[0].shoppingCartNum}}' data-pindex='{{idx}}' data-sindex='0'></image>
+              </view>
+            </view>
+          </view>
+        </view>
+        <!-- 规格信息 -->
+        <block wx:for='{{item.productSpecificationList}}' wx:key="item.id" 
+          wx:if='{{productList[idx].productSpecificationList.length > 1 && productList[idx].isShowSpecification}}'>
+          <view class='product_list_item_specification_item'>
+            <view class="{{item.quantity >= 1 ? 'product_list_item_specification_item_name' : 'product_list_item_specification_item_name_none' }}">{{item.name}}</view>
+            <view class='product_list_item_specification_item_price_and_num'>
+              <view wx:if='{{isShowPrice}}'>
+                <text class="{{item.quantity >= 1 ? 'product_list_item_specification_item_price' : 'product_list_item_specification_item_price_none' }}">￥{{item.price}}</text>
+                <text class="{{item.quantity >= 1 ? 'product_list_item_specification_item_unit' : 'product_list_item_specification_item_unit_none' }}">/{{item.unit}}</text>
+              </view>
+              <view wx:else class='product_list_item_specification_item_price'>价格登录可见</view>
+              <!-- 编辑购买数量 -->
+              <view class='product_list_item_specification_item_cart_num' wx:if='{{item.quantity >= 1}}'>
+                <image src='../../images/common/icon_subcart.png' class='product_list_item_specification_item_add_and_sub_img' 
+                    hidden='{{!item.hasInShoppingCart}}' bindtap='subNum' data-hi='{{item.shoppingCartNum}}'
+                    data-id='{{item.id}}' data-pIndex='{{idx}}' data-sIndex='{{index}}'></image>
+                <view class='product_list_item_specification_item_input' bindtap='editNum' data-id='{{item.id}}
+                    hidden='{{!item.hasInShoppingCart}}'data-pindex='{{idx}}' data-hi='{{item.shoppingCartNum}}'
+                    data-sindex='{{index}}'>{{item.shoppingCartNum}}</view>
+                <image src='../../images/common/icon_addcart.png'               
+                    class='product_list_item_specification_item_add_and_sub_img' bindtap='addNum' data-id='{{item.id}}' 
+                    data-hi='{{item.shoppingCartNum}}' data-pindex='{{idx}}' data-sindex='{{index}}'></image>
+              </view>
+              <view class='product_list_item_specification_item_insert_subscribeStock' wx:else data-id='{{item.id}}'
+                    bindtap='insertSubscribeStock' data-pindex='{{idx}}'>加入到货通知</view>
+            </view>
+          </view>
+        </block>
+      </block>
+      <view wx:if='{{!isLogin && modal[0].isSelected}}' class='empty'>
+        <text>您还未登录，请先登录</text>
+        <view class='to_login_view' bindtap='toLogin'>登录</view>
+      </view>
+      <view wx:elif='{{productList.length < 1}}' class='empty'>
+        <text>暂无商品</text>
+      </view>
+    </view>
+  </scroll-view>
+  <!-- //弹出广告内容-->
+  <view class="modal-box" hidden="{{hideADImage}}">
+    <view class="modal-body">
+      <view class='AD-modal-content' style='width:{{ADWidth}};height:{{ADHeight}};margin-top:{{ADMarginTop}};margin-left:{{ADMarginLeft}};background-image: url({{ADImageUrl}});' bindtap='goToWebView' data-url='{{ADDetailUrl}}'>
+      </view>
+      <image src='../../images/index/closeAD.png' class='close-AD-modal-icon' style='margin-left:{{CloseADIconMarginLeft}}' bindtap='closeADModal'></image>
+    </view>
+  </view>
+</view>

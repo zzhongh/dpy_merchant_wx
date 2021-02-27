@@ -1,0 +1,69 @@
+<view class="content">
+  <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading>
+  <modal wx:if="{{showQuantityModal}}" class='update-quantity-modal-view' bindcancel="modalCancel" bindconfirm='modalConfirm'>
+    <view class='update-quantity-title-view'>请输入您要购买的数量</view>
+    <input value='{{selecteEditProductInfo.num}}' type="number" class='update-quantity-input' bindinput='editInput'></input>
+  </modal>
+  <view class='search_title'>"{{keyWord}}"的搜索结果</view>
+  <scroll-view class='scroll_view' scroll-y='true' >
+    <block wx:for='{{productList}}' wx:key="item.id" wx:for-index='idx'>
+      <!-- 商品信息 -->
+      <view class='product_list_item' bindtap='gotoProductDetail' data-index='{{idx}}'>
+        <image src='{{item.productPreviewImageURL}}' class='product_list_item_img' wx:if="{{item.productPreviewImageURL!=''&&item.productPreviewImageURL!=null}}"></image>
+          <image src='../../images/order/img_loading.jpg' 
+              class='product_list_item_img' wx:else></image>
+        <view class='product_list_item_product_info'>
+          <text class='product_list_item_product_name'>{{item.name}}</text>
+          <text class='product_list_item_product_brand'>{{item.brandName}}  {{item.areaName}}</text>
+          <text class='product_list_item_product_weight'>{{item.weightStr}}</text>
+          <view class='product_list_item_price_and_collection'>
+            <view class='product_list_item_product_price_str'>{{item.priceStr}}</view>
+            <image class='product_list_item_product_collection_img' catchtap='collectClick' data-id='{{item.id}}'
+              data-hi='{{idx}}' src='{{item.isCollected ? collectedImg : unCollectedImg}}'></image>
+          </view>
+        </view>
+      </view>
+      <!-- 规格信息 -->
+      <block wx:for='{{item.productSpecificationList}}' wx:key="item.id">
+        <view class='product_list_item_specification_item'>
+          <view class="{{item.quantity >= 1 ? 'product_list_item_specification_item_name' : 'product_list_item_specification_item_name_none' }}">{{item.name}}</view>
+          <view class='product_list_item_specification_item_price_and_num'>
+            <view wx:if='{{isShowPrice}}'>
+              <text class="{{item.quantity >= 1 ? 'product_list_item_specification_item_price' : 'product_list_item_specification_item_price_none' }}">￥{{item.price}}</text>
+              <text class="{{item.quantity >= 1 ? 'product_list_item_specification_item_unit' : 'product_list_item_specification_item_unit_none' }}">/{{item.unit}}</text>
+            </view>
+            <view wx:else class='product_list_item_specification_item_price'>价格登录可见</view>
+            <!-- 编辑购买数量 -->
+            <view class='product_list_item_specification_item_cart_num' wx:if='{{item.quantity >= 1}}'>
+              <image src='../../images/common/icon_subcart.png' class='product_list_item_specification_item_add_and_sub_img' 
+                  hidden='{{!item.hasInShoppingCart}}' bindtap='subNum' data-hi='{{item.shoppingCartNum}}'
+                  data-id='{{item.id}}' data-pIndex='{{idx}}' data-sIndex='{{index}}'></image>
+              <view class='product_list_item_specification_item_input' bindtap='editNum' data-id='{{item.id}}
+                  hidden='{{!item.hasInShoppingCart}}'data-pindex='{{idx}}' data-hi='{{item.shoppingCartNum}}'
+                  data-sindex='{{index}}'>{{item.shoppingCartNum}}</view>
+              <image src='../../images/common/icon_addcart.png'               
+                  class='product_list_item_specification_item_add_and_sub_img' bindtap='addNum' data-id='{{item.id}}' 
+                  data-hi='{{item.shoppingCartNum}}' data-pindex='{{idx}}' data-sindex='{{index}}'></image>
+            </view>
+            <view class='product_list_item_specification_item_insert_subscribeStock' wx:else data-id='{{item.id}}'
+                  bindtap='insertSubscribeStock' data-pindex='{{idx}}'>加入到货通知</view>
+          </view>
+        </view>
+      </block>
+    </block>
+  </scroll-view>
+  
+  <!-- 底部加入购物车 -->
+  <view class='bottom_shopping_cart'>
+    <text class='totalPrice_str'>总价：</text>
+    <text class='totalPrice'>￥{{totalPrice}}</text>
+    <view class='go_to_shoppingCart_str' bindtap='goToShoppingCart'>去购物车</view>
+  </view>
+  <view class='shopping_cart_img_view' bindtap='goToShoppingCart'>
+    <image src="{{(totalNum > 0 || totalNum) ? shoppingCartImg : shoppingCartImgEmpty}}" class='shopping_cart_img'></image>
+    <text class='shopping_cart_num' hidden='{{totalNum <= 0}}'>{{totalNum}}</text>
+  </view>
+</view>
+

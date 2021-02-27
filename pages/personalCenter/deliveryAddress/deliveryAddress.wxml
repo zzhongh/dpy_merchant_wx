@@ -1,0 +1,50 @@
+<view class='page' style='background-color:#E8F1FA'>
+  <!-- <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading> -->
+  <scroll-view scroll-y="true" style='margin-bottom:45px'>
+    <block wx:for="{{deliveryAddressList}}" wx:for-item="value" wx:key="{{deliveryAddressList}}">
+      <view style='width:100%;background-color:white' bindtap='chooseAddress' data-item='{{value}}'>
+        <!-- 地址信息 -->
+        <view class='address-info-view'>
+          <view class='consigneeName-consigneePhone-wrap-view'>
+            <text class="{{source=='orderConfirm'&&currentAddressId==value.id?'consigneeName-selected-text':'consigneeName-text'}}">{{value.consigneeName}}</text>
+            <text class="{{source=='orderConfirm'&&currentAddressId==value.id?'consigneeTelephone-selected-text':'consigneeTelephone-text'}}">{{value.consigneeTelephone}}</text>
+          </view>
+          <view class='address-description-view'>
+            <text class="{{source=='orderConfirm'&&currentAddressId==value.id?'address-selected-description-text':'address-description-text'}}" wx:if='{{value.streetName!=null}}'>{{value.cityName}}{{value.districtName}}{{value.streetName}}{{value.consigneeAddress}}</text>
+            <text class="{{source=='orderConfirm'&&currentAddressId==value.id?'address-selected-description-text':'address-description-text'}}" wx:if='{{value.streetName==null}}'>{{value.cityName}}{{value.districtName}}{{value.consigneeAddress}}</text>
+          </view>
+        </view>
+        <view class='common-separator common-zero-margin-top'></view>
+        <!-- 操作 -->
+        <view class='operation-wrap-view' wx:if="{{source=='person'}}">
+          <!-- 设置默认地址 -->
+          <view class='set-default-address-view' bindtap='setDefaultAddress' data-item='{{value}}'>
+            <image wx:if="{{value.defaultFlag!='1'}}" src='../../../images/user/address-unselect.png' class='set-default-address-image'></image>
+            <image wx:if="{{value.defaultFlag=='1'}}" src='../../../images/user/address-selected.png' class='set-default-address-image'></image>
+            <text wx:if="{{value.defaultFlag=='1'}}" class='default-address-text'>默认地址</text>
+            <text wx:if="{{value.defaultFlag!='1'}}" class='set-default-address-text'>设为默认地址</text>
+          </view>
+          <!-- 删除/编辑 -->
+          <view class='modify-and-delete-wrap-view'>
+            <view class='modify-view' bindtap='goToModifyAddressView' data-item='{{value}}'>
+              <image src='../../../images/user/editAddress.png' class='modify-address-image'></image>
+              <text class='operation-text'>编辑</text>
+            </view>
+            <view class='delete-view' bindtap='deleteAddress' data-item='{{value}}'>
+              <image src='../../../images/user/deleteAddress.png' class='delete-address-image'></image>
+              <text class='operation-text'>删除</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='common-five-separator common-zero-margin-top'></view>
+    </block>
+  </scroll-view>
+  <!-- 新增收货地址 -->
+  <view style='position:fixed;bottom:45px;'></view>
+  <view bindtap='goToAddNewAddressView' class='add-new-address-view'>
+    <text style='color:white'>新增收货地址</text>
+  </view>
+</view>

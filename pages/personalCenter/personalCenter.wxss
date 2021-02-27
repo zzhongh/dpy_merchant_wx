@@ -1,0 +1,320 @@
+/* pages/personalCenter/personalCenter.wxss  */
+.content{ 
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #F4F5F7;
+}
+
+.header-user-image{
+  width:50px;
+  height:50px;
+  margin-top:15px;
+  margin-left:15px;
+  border-radius: 25px
+}
+
+.header-user-info{
+  height:50px;
+  margin-top:20px;
+  margin-left:15px;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  width: 65%
+}
+
+.home-header-message-wrap-view{
+  width: 15%
+}
+
+.user-header-city-wrap-view{
+  width: 15%
+}
+
+.user-header-wrapView{
+  background-color: #219ff7;
+  align-content: center;
+  /* background-image: url(../../images/user/user-header-bg.png); */
+  height: 240rpx;
+  width: 100%;
+  background-size: 100% 100%;
+}
+
+.user-header-top-view{
+  background-color: #219ff7;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  /* background-image: url(../../images/user/user-header-bg.png); */
+  height: 50rpx;
+  width: 100%;
+  background-size: 100% 100%;
+}
+
+.user-header-info-view{
+  width: 100%;
+  height: 190rpx;
+  background-color: #219ff7;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+}
+
+.user-header-message-view{
+  width: 15%;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+}
+.user-header-message-point-view{
+  width:6px;
+  height:6px;
+  background-color:red;
+  margin-left:-12px;
+  border-radius:3px
+}
+
+.user-header-city-view{
+  width: 10%
+}
+
+.white-text-color{
+  color: white;
+  font-size: 14px;
+  font-weight: 200
+}
+
+.user-header-search-wrap-view{
+  width: 70%;
+  /* height: 600rpx; */
+  /* background-color: #219ff7; */
+}
+
+.message_img{
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 30rpx;
+  margin-bottom: 20rpx;
+  margin-right: 20rpx;
+}
+
+.search_icon{
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+
+.all-orders-wrap-view{
+  width:100%;
+  height:15px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  padding:10px;
+  border-bottom-width: 1px;
+  border-bottom-color: gray;
+  background-color: white;
+  line-height: 15px;
+}
+
+.orders-wrap-view{
+  width:100%;
+  height:80px;
+  background-color:white;
+  display:flex;
+  flex-flow:row;
+}
+
+.orders-item-wrap-view{
+  width:25%;
+  height:100%;
+  align-items:center;
+  text-align:center;
+  line-hight:80px;
+  display: flex;
+  /* align-content: center; */
+  flex-direction: column;
+  margin-top:10px;
+}
+
+.hint-text{
+  color:white;
+  font-size:10px;
+}
+.common-wrap-view{
+  margin-top:10px;
+}
+.common-image-size{
+  width:35px;
+  height:35px;
+}
+.common-image-size{
+  width:35px;
+  height:35px;
+}
+.top-text-wrap-view{
+  margin-top:6px;
+  font-size:14px
+}
+.wallet-wrap-view{
+  width:100%;
+  height:15px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  padding:10px;
+  border-bottom-width: 1px;
+  border-bottom-color: gray;
+  background-color: white;
+  line-height: 15px;
+}
+.wallet-content-view{
+  width:100%;
+  height:30px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  padding:10px;
+  border-bottom-width: 1px;
+  border-bottom-color: gray;
+  background-color: white;
+  line-height: 30px;
+  margin-bottom: 5px
+}
+/* 红点提示view */
+.total-hint-view{
+  width:16px;
+  height:16px;
+  border-radius:8px;
+  background-color:red;
+  margin-left:50%;
+  margin-top:-65px;
+  display:flex;
+  /* text-align: center; */
+  line-height: 16px;
+  /* align-items:center; */
+  justify-content: center;
+}
+/* 提示文字 */
+.hint-text{
+  color:white;
+  font-size:10px;
+}
+.recharge-wrap-view{
+  width:50%;
+  height:30px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  line-height:30px;
+  text-align: center
+}
+.item-image-view{
+  width:20px;
+  height:20px;
+}
+.item-tite-text{
+  color:#666666;
+  margin-left:5px;
+  font-size: 13px
+}
+.balance-wrap-view{
+  width:50%;
+  height:40px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  line-height:40px;
+}
+.service-item-wrap-view{
+  width:100%;
+  height:20px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  padding:10px;
+  border-bottom-width: 1px;
+  border-bottom-color: gray;
+  background-color: white;
+  line-height: 20px;
+}
+.service-item-image-view{
+  width:20px;
+  height:20px;
+}
+.service-item-tite-text{
+  font-size: 14px;
+  margin-left: 6px;
+}
+.qualificationStatus-image{
+  width:48px;
+  height:18px;
+  margin-top:4px;
+  margin-left:4px
+}
+.item-right-text{
+  font-size:13px;
+  color:#666666;
+  position:absolute;
+  right:30px;
+}
+.wx_pay_modal_box{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0px;
+  background:rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  
+}
+.wx_pay_modal_content{
+  height: 260rpx;
+  width: 80%;
+  background-color: white;
+  margin-top: 300rpx;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 20rpx;
+}
+.wx_pay_modal_title{
+  width: 100%;
+  height: 60rpx;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 50rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.wx_pay_modal_buttoms{
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 30rpx;
+  border-top: 0.5rpx solid rgb(217, 217, 218);
+}
+.wx_pay_modal_left_buttom{
+  height: 100rpx;
+  width: 50%;
+  font-size: 30rpx;
+  color: red;
+  line-height: 120rpx;
+  text-align: center;
+  border-right: 0.5rpx solid rgb(217, 217, 218);
+}
+.wx_pay_modal_right_buttom{
+  height: 100rpx;
+  width: 100%;
+  font-size: 30rpx;
+  color: #219ff7;
+  line-height: 120rpx;
+  text-align: center;
+  font-weight: 800
+}

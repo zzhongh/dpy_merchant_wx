@@ -1,0 +1,20 @@
+<!--pages/personalCenter/rechargeSuccess/rechargeSuccess.wxml-->
+<view class='page' style='background-color:#E8F1FA'>
+  <view class='success-info-view'>
+    <image src='../../../images/user/recharge_success.png' class='success-image'></image>
+    <text class='success-text'>恭喜您，充值成功！</text>
+    <text class='payable-price'>￥{{payablePrice}}</text>
+  </view>
+  <view class='payMethod-view'>
+    <text class='payMethod-title'>支付方式</text>
+    <text class='payMethod-text'>微信支付</text>
+  </view>
+  <view class='buttons-wrap-view'>
+    <view class='to-home-button-view' bindtap='goToHome'>
+      <text class='to-home-button-text'>返回首页</text>
+    </view>
+    <view class='to-person-button-view' bindtap='goToPersonalCenter'>
+      <text class='to-person-button-text'>查看余额</text>
+    </view>
+  </view>
+</view>

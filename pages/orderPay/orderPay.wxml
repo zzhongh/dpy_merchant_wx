@@ -1,0 +1,80 @@
+<view class="content">
+  <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading> 
+  <view class='wx_pay_modal_box' wx:if='{{isShowWxModal}}'>
+    <view class='wx_pay_modal_content'>
+      <view class='wx_pay_modal_title'>提示</view>
+      <view class='wx_pay_modal_title'>是否支付成功？</view>
+      <view class='wx_pay_modal_buttoms'>
+        <view class='wx_pay_modal_left_buttom' bindtap='modalCancel'>未支付</view>
+        <view class='wx_pay_modal_right_buttom' bindtap='modalConfirm'>我已支付成功</view>
+      </view>
+    </view>
+  </view>
+  <view class='wx_pay_modal_box' wx:if='{{isShowLogoutModal}}'>
+    <view class='wx_pay_modal_content'>
+      <view class='wx_pay_modal_title'>温馨提示</view>
+      <view class='wx_pay_modal_title'>状态已过期，请重新登录</view>
+      <view class='wx_pay_modal_buttoms'>
+        <!-- <view class='wx_pay_modal_left_buttom' bindtap='logoutModalCancel'>未支付</view> -->
+        <view class='wx_logout_modal_right_buttom' bindtap='logoutModalConfirm'>确定</view>
+      </view>
+    </view>
+  </view>
+  <view class='product_price_and_shipping_price'>
+    <text class='product_price'>商品总价：{{orderPrice == 0 ? '0.00' : orderPrice}}元　　</text>
+    <text class='product_price'>运费：{{transportPrice == 0 ? '0.00' : transportPrice}}元</text>
+  </view>
+  <view class='payable_price_view'>￥{{payablePrice}}</view>
+  <view wx:if='{{remainingTime}}' class='remaining_time_view'>支付剩余时间 {{remainingTime}}</view>
+  <view style='width:100%;height:50rpx;background-color:white'></view>
+  <view class='paymethod_item_view' hidden='{{!yuePayIsShow}}' bindtap='payMethodClick' data-hi='yue'>
+    <image src='../../images/order/pay_wallet.png' class='paymethod_img'></image>
+    <view class='paymethod_text'>余额支付</view>
+    <image src="{{selectedPaymethod == 'yue' ? '../../images/user/pay_method_selected.png' : '../../images/user/pay_method_unselect.png'}}" class='paymethod_is_selected_img'></image>
+  </view>
+  <view class='common-separator common-zero-margin-top'></view>
+  <view class='paymethod_item_view' hidden='{{!codPayIsShow}}' bindtap='payMethodClick' data-hi='cod'>
+    <image src='../../images/order/pay_cod.png' class='paymethod_img'></image>
+    <view class='paymethod_text'>货到付款</view>
+    <image src="{{selectedPaymethod == 'cod' ? '../../images/user/pay_method_selected.png' : '../../images/user/pay_method_unselect.png'}}" class='paymethod_is_selected_img'></image>
+  </view>
+  <view hidden='{{!codPayIsShow}}' class='common-separator common-zero-margin-top'></view>
+  <view class='paymethod_item_view' hidden='{{!wxpayIsShow}}' bindtap='payMethodClick' data-hi='weixin'>
+    <image src='../../images/order/pay_weipay.png' class='paymethod_img'></image>
+    <view class='paymethod_text'>微信支付</view>
+    <image src="{{selectedPaymethod == 'weixin' ? '../../images/user/pay_method_selected.png' : '../../images/user/pay_method_unselect.png'}}" class='paymethod_is_selected_img'></image>
+  </view>
+  <view hidden='{{!wxpayIsShow}}' class='common-separator common-zero-margin-top'></view>
+  <view class='pay' bindtap='pay'>确认支付{{payablePrice}}元</view>
+  <view class='pay_password_box' wx:if='{{flag}}'>
+    <view class='pay_password_content'>
+      <view class='pay_password_title'>请输入您的支付密码</view>
+      <view class='pay_password_forget'>
+        <text bindtap='toResetPassword' wx:if='{{!isOpenedFreePassword}}'>忘记密码？</text>
+      </view>
+      <view class='password_input_view' bindtap='payPasswordInputClick'>
+        <view wx:for='{{passwordLength}}' wx:key='{{item}}' class="{{index == 0 ? 'password_input_item_first' : index == passwordLength.length - 1 ? 'password_input_item_end' : 'password_input_item_other'}}">
+        <view class='dot_view' hidden='{{(index > password.length-1)}}'></view>
+        </view>
+      </view>
+      <!-- 加下面这个view是为了处理iPhone7plus的一个显示的问题 -->
+      <view class='space'></view>
+      <view class='free_password_view' wx:if='{{!isOpenedFreePassword}}'>
+        <view class='free_password_img_and_str' bindtap='freePasswordClick'>
+          <image src="{{isSelectedFreePassword ? '../../images/user/pay_method_selected.png' : '../../images/user/pay_method_unselect.png'}}"  class='paymethod_is_selected_img'></image>
+          <view class='free_password_text'>开启免密支付</view>
+        </view> 
+        <view class='free_password_explain' bindtap='whatIsFreePassword'>(什么是免密支付)</view>
+      </view>
+      <view class='pay_password_forget' wx:else>
+        <text bindtap='toResetPassword'>忘记密码？</text>
+      </view>
+      <input class='input_veiw' focus='{{focus}}' value='{{password}}' bindinput='payPasswordInput' 
+        maxlength='6' type='number'></input>
+      <image src='../../images/order/pop_cancle.png' class='close_password_input_img' bindtap='closePasswordInputModal'></image>
+    </view>
+  </view>
+</view>
+

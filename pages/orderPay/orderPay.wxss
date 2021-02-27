@@ -1,0 +1,263 @@
+.content{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+page{
+  background-color: #F4F5F7;
+}
+.product_price_and_shipping_price{
+  background-color: white;
+  padding-top: 50rpx;
+  width: 100%;
+  text-align: center;
+}
+.product_price{
+  color: rgb(156, 157, 158);
+  font-size: 34rpx;
+}
+.payable_price_view{
+  background-color: white;
+  padding-top: 30rpx;
+  font-size: 40rpx;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+.remaining_time_view{
+  background-color: white;
+  padding-top: 30rpx;
+  width: 100%;
+  text-align: center;
+  font-size: 34rpx;
+  color: rgb(156, 157, 158);
+}
+.paymethod_item_view{
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  height: 100rpx;
+  align-items: center;
+  justify-content: center;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  width: 100%;
+  margin-top: 1rpx;
+}
+.paymethod_img{
+  height: 40rpx;
+  width: 40rpx;
+}
+.paymethod_text{
+  width: 80%;
+  font-size: 32rpx;
+  padding-left: 20rpx;
+}
+.paymethod_is_selected_img{
+  height: 40rpx;
+  width: 40rpx;
+}
+.pay{
+  width: 100%;
+  height: 100rpx;
+  margin-top: 30rpx;
+  background-color: #219ff7;
+  text-align: center;
+  font-size: 30rpx;
+  color: white;
+  line-height: 100rpx;
+}
+.pay_password_box{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0px;
+  background:rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+}
+.pay_password_content{
+  height: 300rpx;
+  width: 80%;
+  background-color: white;
+  margin-top: 100rpx;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pay_password_title{
+  width: 100%;
+  font-size: 32rpx;
+  font-weight: bold;
+  text-align: center;
+}
+.pay_password_forget{
+  width: 95%;
+  height: 50rpx;
+  font-size: 28rpx;
+  color: #219ff7;
+  text-align: end;
+  padding-right: 20rpx;
+}
+
+.password_input_view{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  margin-top: 10rpx;
+  margin-bottom: 20rpx;
+}
+.password_input_item_first{
+  height: 90rpx;
+  width: 90rpx;
+  border: 0.5rpx solid rgb(176, 176, 177);
+  border-top-left-radius: 10rpx;
+  border-bottom-left-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.password_input_item_other{
+  height: 90rpx;
+  width: 90rpx;
+  border-top: 0.5rpx solid rgb(176, 176, 177);
+  border-bottom: 0.5rpx solid rgb(176, 176, 177);
+  border-right: 0.5rpx solid rgb(176, 176, 177);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.password_input_item_end{
+  height: 90rpx;
+  width: 90rpx;
+  border-top: 0.5rpx solid rgb(176, 176, 177);
+  border-bottom: 0.5rpx solid rgb(176, 176, 177);
+  border-right: 0.5rpx solid rgb(176, 176, 177);
+  border-top-right-radius: 10rpx;
+  border-bottom-right-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dot_view{
+  height: 40rpx;
+  width: 40rpx;
+  background-color: black;
+  border-radius: 50rpx;
+}
+.input_veiw{
+  width: 0;
+  height: 0;
+  min-height: 0;
+  position: relative;
+  text-indent: -999em;
+  left: -100%;
+}
+.free_password_view{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 60rpx;
+  align-items: center;
+  
+}
+.free_password_img_and_str{
+  display: flex;
+  flex-direction: row;
+  padding-left: 20rpx;
+  align-items: center;
+}
+.free_password_text{
+  font-size: 35rpx;
+  color: #219ff7;
+  font-weight: bold;
+  margin-left: 10rpx;
+}
+.free_password_explain{
+  font-size: 28rpx;
+  color: #219ff7;
+  padding-right: 40rpx;
+}
+.close_password_input_img{
+  
+  height: 40rpx;
+  width: 40rpx;
+  position: fixed;
+  top: 120rpx;
+  left: 10%;
+}
+.wx_pay_modal_box{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0px;
+  background:rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+}
+.wx_pay_modal_content{
+  height: 260rpx;
+  width: 80%;
+  background-color: white;
+  margin-top: 300rpx;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 20rpx;
+}
+.wx_pay_modal_title{
+  width: 100%;
+  height: 60rpx;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 50rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.wx_pay_modal_buttoms{
+  height: 100rpx;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 30rpx;
+  border-top: 0.5rpx solid rgb(217, 217, 218);
+}
+.wx_pay_modal_left_buttom{
+  height: 100rpx;
+  width: 50%;
+  font-size: 30rpx;
+  color: red;
+  line-height: 120rpx;
+  text-align: center;
+  border-right: 0.5rpx solid rgb(217, 217, 218);
+}
+.wx_pay_modal_right_buttom{
+  height: 100rpx;
+  width: 50%;
+  font-size: 30rpx;
+  color: #219ff7;
+  line-height: 120rpx;
+  text-align: center;
+}
+
+.space{
+  width: 100%;
+  height: 1rpx;
+  float: top;
+}
+
+.wx_logout_modal_right_buttom{
+  height: 100rpx;
+  width: 100%;
+  font-size: 30rpx;
+  color: #219ff7;
+  line-height: 120rpx;
+  text-align: center;
+  font-weight: 800
+}

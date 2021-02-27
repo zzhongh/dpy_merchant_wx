@@ -1,0 +1,65 @@
+/* pages/personalCenter/addOrModifyAddress/addOrModifyAddress.wxss */
+.item-type-wrap-view{
+  width:30%;
+  justify-content: center;
+  align-items:center;
+}
+.item-type-text{
+  font-size:14px;
+  margin-left:6px;
+  color: #333333
+}
+.item-type-input{
+  width:90%;
+  height:100%;
+  justify-content: center;
+  align-items:center;
+  font-size:13px;
+}
+.item-wrap-view{
+  width:100%;
+  height:45px;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  background-color: white
+}
+.choose-address-item-view{
+  width:90%;
+  justify-content: center;
+  align-items:center;
+}
+.choose-available-area{
+  width:10%;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+.choose-available-area-text{
+  font-size:13px;
+  color: #666666;
+}
+.save-button-view{
+  width:86%;
+  height:40px;
+  margin-top:16px;
+  margin-left:7%;
+  background-color:#00c4f9;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+.address-description-textarea{
+  width:96%;
+  height:96%;
+  font-size:14px;
+  margin-left:2%;
+  color: #333333;
+  background-color: white
+}
+.address-description-wrap-view{
+  width:100%;
+  height:120px;
+  background-color: white;
+  padding-top: 6px
+}

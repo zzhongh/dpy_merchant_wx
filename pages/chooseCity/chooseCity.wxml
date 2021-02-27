@@ -1,0 +1,21 @@
+<view class="content">
+  <loading hidden="{{toastStatus}}">
+    加载中....
+  </loading>
+  <block wx:for='{{provincesAndCityList}}' wx:key='{{item.id}}'>
+    <view class='province_item'>
+      <view class='province_name'>{{item.name}}</view>
+      <view class='line'></view>
+      <!-- 加下面这个view是为了处理iPhone7plus的一个显示的问题 -->
+      <view class='space'></view>
+      <view class='city_item'>
+        <block wx:for='{{item.cityList}}' wx:key='{{item.id}}'>
+          <view class="{{item.isSelected ? 'city_name_selected' : 'city_name'}}" bindtap='chooseCity' 
+                data-id='{{item.id}}' data-hi='{{item.name}}'>{{item.name}}</view>
+        </block>
+      </view>
+      
+    </view>
+  </block>
+</view>
+

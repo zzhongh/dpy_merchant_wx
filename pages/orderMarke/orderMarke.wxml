@@ -1,0 +1,25 @@
+<view class="content">
+  <scroll-view class='scroll_view'>
+    <view class='mark_view'>
+      <textarea class='text_area' placeholder='请输入您的其他要求' maxlength='50' value='{{markes}}' bindinput='bindInput'></textarea>
+      <text class='font_num'>{{fontNum}}/50</text>
+    </view>
+    <view wx:if='{{historyMarkeList.length > 0}}' class='history_list'>
+      <block wx:for='{{historyMarkeList}}' wx:key='{{item}}'>
+        <view class='history_item_view' bindtap='historyClick' data-item='{{item}}'>
+          <text class='history_item'>{{item}}</text>
+        </view>
+        
+      </block>
+      <view class='search_clear'>
+        <image src='../../images/order/search_clear.png' class='search_clear_img'></image>
+        <text class='search_clear_text'>清空历史备注</text>
+      </view>
+    </view>
+    <view class='search_history_none' wx:else>
+      <text class='search_clear_text'>暂无历史数据</text>
+    </view>
+  </scroll-view>
+  <view class='bottom_entry' bindtap='entry'>确定</view>
+</view>
+

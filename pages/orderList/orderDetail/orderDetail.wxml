@@ -1,0 +1,102 @@
+<view class='page' style='background-color:#E8F1FA'>
+  <scroll-view>
+    <view class='address-wrap-view' bindtap='resetPayPassword'>
+      <view class='address-name-phone-view'>
+        <text class='item-tite-text dark-text'>收货人 : {{orderInfo.consigneeName}}</text>
+        <text class='item-value-text light-text'>{{orderInfo.consigneeTelephone}}</text>
+      </view>
+      <view style='width:100%'>
+        <text class='dark-text common-font-size' wx:if="{{orderInfo.addressStreetName==''||orderInfo.addressStreetName==null}}">
+          收货地址 : {{orderInfo.addressProvinceName}}{{orderInfo.addressCityName}}{{orderInfo.addressDistrictName}}{{orderInfo.consigneeAddress}}
+        </text>
+        <text class='dark-text common-font-size' wx:else>
+          收货地址 : {{orderInfo.addressProvinceName}}{{orderInfo.addressCityName}}{{orderInfo.addressDistrictName}}{{orderInfo.addressStreetName}}{{orderInfo.consigneeAddress}}
+        </text>
+      </view> 
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <block wx:for='{{orderInfo.orderProductSnapshotList}}' wx:key='{{item}}'>
+      <view class='product-wrap-view'>
+        <image src='{{item.productPreviewImageURL}}' wx:if="{{item.productPreviewImageURL!=''}}" style='width:85px;height:80px'></image>
+        <image src='../../../images/order/img_loading.jpg' wx:if="{{item.productPreviewImageURL==''}}" style='width:85px;height:80px'></image>
+        <view class='product-content-view'>
+          <text class='dark-text common-font-size'>{{item.productName}}</text>
+          <text class='light-text common-font-size margin'>{{item.specificationName}}</text>
+          <view>
+            <text class='red-text common-font-size margin'>{{item.specificationUnitPrice}}元/{{item.unit}}</text>
+            <text class='common-font-size'>x{{item.purchasedNum}}{{item.unit}}</text>
+          </view>
+          
+        </view>
+      </view>
+      <view class='common-separator common-zero-margin-top'></view>
+    </block>
+    <view class='item-wrap-view'>
+      <text class='item-tite-text dark-text'>下单时间</text>
+      <text class='item-value-text light-text'>{{orderInfo.orderTimeStr}}</text>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='item-wrap-view' wx:if='{{orderInfo.payTime!=null}}'>
+      <text class='item-tite-text dark-text'>支付时间</text>
+      <text class='item-value-text light-text'>{{orderInfo.payTimeStr}}</text>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='item-wrap-view' wx:if='{{orderInfo.payMethod!=null}}'>
+      <text class='item-tite-text dark-text'>支付方式</text>
+      <text class='item-value-text red-text'>{{orderInfo.payMethodStr}}</text>
+    </view>
+    <view class='common-separator common-zero-margin-top' wx:if='{{orderInfo.payMethod!=null}}'></view>
+    <view class='item-wrap-view'>
+      <text class='item-tite-text dark-text'>预约送达时间</text>
+      <text class='item-value-text red-text'>{{orderInfo.appointDeliveryTimeStr}}</text>
+    </view>
+    <view class='common-separator common-zero-margin-top' wx:if="{{orderInfo.deliverymanName!=''}}"></view>
+    <view class='item-wrap-view' wx:if="{{orderInfo.deliverymanName!=''}}">
+      <text class='item-tite-text dark-text'>配送人</text>
+      <text class='item-value-text light-text'>{{orderInfo.deliverymanName}}</text>
+    </view>
+    <view class='common-separator common-zero-margin-top' wx:if="{{orderInfo.deliverymanTelephone!=''}}"></view>
+    <view class='item-wrap-view' wx:if="{{orderInfo.deliverymanTelephone!=''}}">
+      <text class='item-tite-text dark-text'>配送人电话</text>
+      <text class='item-value-text light-text'>{{orderInfo.deliverymanTelephone}}</text>
+    </view>
+    <view class='common-five-separator common-zero-margin-top'></view>
+    <view class='item-wrap-view'>
+      <text class='item-tite-text dark-text'>商品总价</text>
+      <text class='item-value-text red-text'>+{{orderInfo.productPrice}}元</text>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='item-wrap-view'>
+      <text class='item-tite-text dark-text'>运费</text>
+      <text class='light-text' style='font-size:11px;margin-left:6px'>(总重：</text>
+      <text class='light-text' style='font-size:11px'>{{orderInfo.totalWeight}}kg</text>
+      <text class='light-text' style='font-size:11px'>)</text>
+      <text class='item-value-text red-text'>+{{orderInfo.shippingPrice}}元</text>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='item-wrap-view' wx:if='{{orderInfo.pointDeductionPrice!=0}}'>
+      <text class='item-tite-text dark-text'>积分抵扣:</text>
+      <text class='item-value-text red-text'>-{{orderInfo.pointDeductionPrice}}元</text>
+    </view>
+    <view class='common-separator common-zero-margin-top' wx:if='{{orderInfo.pointDeductionPrice!=0}}'></view>
+    <view class='item-wrap-view' wx:if='{{orderInfo.redPacketAmount!=0}}'>
+      <view>
+        <text class='item-tite-text dark-text'>红包抵扣:</text>
+        <text class='item-tite-text red-text'>{{orderInfo.redPacketAmount}}元红包</text>
+      </view>
+      
+      <text class='item-value-text red-text'>-{{orderInfo.redPacketAmount}}元</text>
+    </view>
+    <view class='common-separator common-zero-margin-top' wx:if='{{orderInfo.redPacketAmount!=0}}'></view>
+    <view class='item-wrap-view' wx:if='{{orderInfo.refundPrice!=0}}'>
+      <text class='item-tite-text dark-text'>退款金额</text>
+      <text class='item-value-text red-text'>-{{orderInfo.refundPrice}}元</text>
+    </view>
+    <view class='common-separator common-zero-margin-top' wx:if='{{orderInfo.redPacketAmount!=0}}'></view>
+    <view class='item-wrap-view'>
+      <text class='item-tite-text dark-text'>实付金额</text>
+      <text class='item-value-text red-text'>{{orderInfo.payablePrice}}元</text>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+  </scroll-view>
+</view>

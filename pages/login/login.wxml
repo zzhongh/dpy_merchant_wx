@@ -1,0 +1,20 @@
+<view class="content">
+  <loading hidden="{{toastStatus}}">
+    登录中...
+  </loading>
+  <image src='../../images/common/ic_launcher.png' class='dpy_img'></image>
+  <view class='app_name'>冻品云</view>
+  <view class='company_name'>海南冻品云供应链科技有限公司</view>
+  <view class='line_view'></view>
+  <view class='permission_view'>
+    <view class='permission_detail_str'>该程序将获取一下权限</view>
+    <view class='permission_detail'>• 获得您的公开信息（昵称、头像等）</view>
+  </view>
+  <view class='button_view'>
+    <button class='reject_button' type="default" size="{{primarySize}}" bindtap='goToHome'>拒绝</button>
+    <button class='allow_button' open-type="getUserInfo" bindgetuserinfo="getUserInfo" type="primary" size="{{primarySize}}">允许</button>
+  </view>
+  <!-- <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button> -->
+    
+</view>
+

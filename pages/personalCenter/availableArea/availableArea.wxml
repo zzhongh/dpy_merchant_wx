@@ -1,0 +1,8 @@
+<view class='page' style='background-color:#E8F1FA'>
+  <block wx:for="{{avaliableAreaList}}" wx:for-item="value" wx:key="{{avaliableAreaList}}">
+      <view class='area-item-view' bindtap='getAvaliableAreaList' data-item='{{value}}'>
+        <text class='area-text'>{{value.name}}</text>
+      </view>
+      <view class='common-separator common-zero-margin-top'></view>
+    </block>
+</view>

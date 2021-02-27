@@ -1,0 +1,145 @@
+<view class="content" style='background-color:#E8F1FA'>
+  <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading>
+  <view class="navbar">
+  <!-- {{activityIndex==index ? 'activity_item' : 'item'}} -->
+    <view wx:for="{{tabList}}" data-idx="{{index}}" class="{{activityIndex == index ? 'avtivity_text' : 'item'}}"  
+      wx:key="unique" bindtap="navbarTap">
+      <text>{{item}}</text>
+      <view class='activity_item' wx:if='{{activityIndex == index}}'></view>
+    </view>
+    
+  </view>
+  
+  <scroll-view scroll-y='true' class='scroll_view'>
+    <block wx:for='{{orderList}}' wx:key='{{item.id}}'>
+    <!-- 订单列表 -->
+      <view class='order_item_view' bindtap='toOrderDetail' data-index='{{index}}' wx:if='{{activityIndex != 4}}'>
+        <!-- 订单号和订单状态 -->
+        <view class='order_no_and_status'>
+          <view class='order_no'>订单编号:{{item.orderNo}}</view>
+          <view class='order_status_view'>
+            <view class="{{item.orderStatus == '0' ? 'order_status_cancle' : item.orderStatus == '1' ? 'order_status_unpay' : item.orderStatus == '2' ? 'order_status_transit' : item.orderStatus == '3' ? 'order_status_transit' : item.orderStatus == '4' ? 'order_status_transit' : item.orderStatus == '5' ? 'order_status_deliveried' : item.orderStatus == '6' ? 'order_status_transit' : ''}}">
+              {{item.orderStatus == '0' ? '已取消' 
+              : item.orderStatus == '1' ? '未支付' : item.orderStatus == '2' ? '未发货' 
+              : item.orderStatus == '3' ? '待收货' : item.orderStatus == '4' ? '待收货' 
+              : item.orderStatus == '5' ? '已完成' : item.orderStatus == '6' ? '待出库' : ''}}</view>
+            <image src='../../images/common/back-arrow-right-gray.png' class='order_right_img'></image>
+          </view>
+        </view>
+        <view class='line_view'></view>
+        <!-- 订单信息 -->
+        <view class='order_info_view'>
+          <view class='order_info_imgs' wx:if='{{item.orderProductSnapshotList.length > 1}}'>
+            <image src='{{item.orderProductSnapshotList[0].productPreviewImageURL}}' style='height:{{imgHeight}};width:{{imgWidth}}'
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.orderProductSnapshotList[0].productPreviewImageURL!=''}}"></image>
+              <image src='../../images/order/img_loading.jpg'  style='height:{{imgHeight}};width:{{imgWidth}}'
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.orderProductSnapshotList[0].productPreviewImageURL==''}}"></image>
+
+              <image src='{{item.orderProductSnapshotList[1].productPreviewImageURL}}' style='height:{{imgHeight}};width:{{imgWidth}}'
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.orderProductSnapshotList[1].productPreviewImageURL!=''}}"></image>
+              <image src='../../images/order/img_loading.jpg' style='height:{{imgHeight}};width:{{imgWidth}}'
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.orderProductSnapshotList[1].productPreviewImageURL==''}}"></image>
+
+              <image src='{{item.orderProductSnapshotList[2].productPreviewImageURL}}' style='height:{{imgHeight}};width:{{imgWidth}}' 
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.orderProductSnapshotList[2].productPreviewImageURL!=''}}"></image>
+              <image src='../../images/order/img_loading.jpg' style='height:{{imgHeight}};width:{{imgWidth}};width:{{imgWidth}}' 
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.orderProductSnapshotList[2].productPreviewImageURL==''}}"></image>
+          </view>
+          <view class='order_info_imgs' wx:else>
+            <image src='{{item.orderProductSnapshotList[0].productPreviewImageURL}}' style='height:{{imgHeight}};width:{{imgWidth}}' 
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.orderProductSnapshotList[0].productPreviewImageURL!=''}}"></image>
+              <image src='../../images/order/img_loading.jpg'  style='height:{{imgHeight}};width:{{imgWidth}}' 
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.orderProductSnapshotList[0].productPreviewImageURL==''}}"></image>
+ 
+            <view class='order_product_info'>
+              <text class='order_product_name'>{{item.orderProductSnapshotList[0].productName}}</text>
+              <text class='order_product_specification'>{{item.orderProductSnapshotList[0].specificationName}}</text>
+              <text class='order_product_price'>￥{{item.orderProductSnapshotList[0].specificationUnitPrice}}/{{item.orderProductSnapshotList[0].unit}}</text>
+            </view>
+          </view>
+          <view class='order_info_num'>共{{item.totalNum}}件</view>
+        </view>
+        <view class='line_view'></view>
+        <!-- 订单配送时间和金额 -->
+        <view class='order_time_and_money'>
+          <view class='order_appoints_delivery_time'>预约送达时间:{{item.appointsDeliveryTimeStr}}</view>
+          <view class='order_price'>
+            <text class='order_order_price'>订单总额:{{item.productPrice}}元    </text>
+            <text class='order_order_price'>{{item.paymentStatus == '1' ? '实付金额:' : '应付金额:'}}</text>
+            <text class='order_payable_price'>￥{{item.payablePrice}}</text>
+          </view>
+        </view>
+        <view class='line_view'></view>
+        <!-- 底部几个按钮  -->
+        <!-- 加下面这个view是为了处理iPhone7plus的一个显示的问题 -->
+        <view class='space'></view>
+        <view class='buttom_view' wx:if="{{item.orderStatus != '0'}}">
+          <view class='order_cancel' wx:if="{{item.orderStatus == '1' || item.orderStatus == '6'}}" 
+            catchtap='cancelOrder' data-index='{{index}}'>取消订单</view>
+          <view class='order_pay' wx:if="{{item.orderStatus == '1'}}" catchtap='toPay' data-index='{{index}}'>立即支付</view>
+          <view class='order_evaluation'  catchtap='toEvaluate' wx:if="{{item.orderStatus == '5'}}">去评价</view>
+          <view class='order_refunde' wx:if="{{(item.orderStatus == '2' || item.orderStatus == '3' || item.orderStatus == '4' || item.orderStatus == '5') && item.isCanRefund}}" 
+             catchtap='toExchange' data-index='{{index}}'>退换货</view>
+        </view>
+      </view>
+      <!-- 售后订单列表 -->
+      <view class='order_item_view' bindtap='toOrderDetail' data-index='{{index}}' wx:else>
+        <!-- 订单号和订单状态 -->
+        <view class='order_no_and_status'>
+          <view class='order_no'>订单编号:{{item.orderNo}}</view>
+          <view class='order_status_view'>
+            <view class="{{item.status == '0' ? 'refund_order_status_waiting' : item.status == '1' ? 'refund_order_status_pass' : item.status == '2' ? 'refund_order_status_reject' : ''}}">
+              {{item.status == '0' ? '待审核' : item.status == '1' ? '审核通过' : item.status == '2' ? '审核失败' : ''}}</view>
+            <image src='../../images/common/back-arrow-right-gray.png' class='order_right_img'></image>
+          </view>
+        </view>
+        <view class='line_view'></view>
+        <!-- 订单信息 --> 
+        <view class='order_info_view'>
+          <view class='order_info_imgs' wx:if='{{item.refundOrderProductSnapshotList.length > 1}}'>
+            <image src='{{item.refundOrderProductSnapshotList[0].productPreviewImageURL}}' style='height:{{imgHeight}};width:{{imgWidth}}
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.refundOrderProductSnapshotList[0].productPreviewImageURL!=''}}"></image>
+              <image src='../../images/order/img_loading.jpg' style='height:{{imgHeight}};width:{{imgWidth}} 
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.refundOrderProductSnapshotList[0].productPreviewImageURL==''}}"></image>
+
+              <image src='{{item.refundOrderProductSnapshotList[1].productPreviewImageURL}}' style='height:{{imgHeight}};width:{{imgWidth}} 
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.refundOrderProductSnapshotList[1].productPreviewImageURL!=''}}"></image>
+              <image src='../../images/order/img_loading.jpg' style='height:{{imgHeight}};width:{{imgWidth}} 
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.refundOrderProductSnapshotList[1].productPreviewImageURL==''}}"></image>
+
+              <image src='{{item.refundOrderProductSnapshotList[2].productPreviewImageURL}}' style='height:{{imgHeight}};width:{{imgWidth}} 
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.refundOrderProductSnapshotList[2].productPreviewImageURL!=''}}"></image>
+              <image src='../../images/order/img_loading.jpg' style='height:{{imgHeight}};width:{{imgWidth}} 
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.refundOrderProductSnapshotList[2].productPreviewImageURL==''}}"></image>
+
+          </view>
+          <view class='order_info_imgs' wx:else>
+            <image src='{{item.refundOrderProductSnapshotList[0].productPreviewImageURL}}' style='height:{{imgHeight}};width:{{imgWidth}} 
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.refundOrderProductSnapshotList[0].productPreviewImageURL!=''}}"></image>
+              <image src='../../images/order/img_loading.jpg' style='height:{{imgHeight}};width:{{imgWidth}} 
+              class='order_product_img' mode='scaleToFill' wx:if="{{item.refundOrderProductSnapshotList[0].productPreviewImageURL==''}}"></image>
+            <view class='order_product_info'>
+              <view class='order_product_name'>{{item.refundOrderProductSnapshotList[0].productName}}</view>
+              <view class='order_product_specification'>{{item.refundOrderProductSnapshotList[0].specificationName}}</view>
+              <view class='order_product_price'>￥{{item.refundOrderProductSnapshotList[0].specificationUnitPrice}}/{{item.refundOrderProductSnapshotList[0].unit}}</view>
+            </view>
+          </view>
+          <view class='order_info_num'>共{{item.totalNum}}件</view>
+        </view>
+        <view class='line_view'></view>
+        <!-- 申请时间和金额 -->
+        <view class='order_time_and_money'>
+          <view class='order_appoints_delivery_time'>申请时间:{{item.appointsDeliveryTimeStr}}</view>
+          <view class='order_price'>
+            <text class='order_order_price'>(手续费￥{{item.poundageAmount}})    </text>
+            <text class='order_order_price'>退款金额:</text>
+            <text class='order_payable_price'>￥{{item.refundPrice}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>
+

@@ -1,0 +1,84 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/category/category",
+    "pages/shoppingCart/shoppingCart",
+    "pages/personalCenter/personalCenter",
+    "pages/personalCenter/setting/setting",
+    "pages/personalCenter/aboutUs/aboutUs",
+    "pages/personalCenter/resetPayPassword/resetPayPassword",
+    "pages/personalCenter/deliveryAddress/deliveryAddress",
+    "pages/personalCenter/availableArea/availableArea",
+    "pages/personalCenter/addOrModifyAddress/addOrModifyAddress",
+    "pages/personalCenter/transactionRecords/transactionRecords",
+    "pages/personalCenter/rechargeRules/rechargeRules",
+    "pages/personalCenter/updatePayWithoutPasswordStatus/updatePayWithoutPasswordStatus",
+    "pages/personalCenter/payPasswordInput/payPasswordInput",
+    "pages/personalCenter/rechargePay/rechargePay",
+    "pages/personalCenter/pointExchange/pointExchange",
+    "pages/personalCenter/myRedPacket/myRedPacket",
+    "pages/personalCenter/collectionProducts/collectionProducts",
+    "pages/personalCenter/rechargeSuccess/rechargeSuccess",
+    "pages/productDetail/productDetail",
+    "pages/login/login",
+    "pages/chooseCity/chooseCity",
+    "pages/productSearch/productSearch",
+    "pages/searchProductList/searchProductList",
+    "pages/common/webView",
+    "pages/chooseRefundProducts/chooseRefundProducts",
+    "pages/orderList/orderList",
+    "pages/orderList/orderDetail/orderDetail",
+    "pages/orderList/afterSaleOrderDetail/afterSaleOrderDetail",
+    "pages/useableRedPacketList/useableRedPacketList",
+    "pages/orderMarke/orderMarke",
+    "pages/orderComfirm/orderComfirm",
+    "pages/exchange/exchange",
+    "pages/orderPay/orderPay",
+    "pages/bindTelephone/bindTelephone",
+    "pages/orderPaySuccess/orderPaySuccess"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#219ff7",
+    "navigationBarTitleText": "冻品云",
+    "navigationBarTextStyle": "white"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "tabBar": {
+    "color": "#7F8389",
+    "selectedColor": "#00abff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/index",
+        "iconPath": "images/tabbar/home.png",
+        "selectedIconPath": "images/tabbar/home-selected.png"
+      },
+      {
+        "text": "分类",
+        "pagePath": "pages/category/category",
+        "iconPath": "images/tabbar/category.png",
+        "selectedIconPath": "images/tabbar/category-selected.png"
+      },
+      {
+        "text": "购物车",
+        "pagePath": "pages/shoppingCart/shoppingCart",
+        "iconPath": "images/tabbar/shoppingCart.png",
+        "selectedIconPath": "images/tabbar/shoppingCart-selected.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/personalCenter/personalCenter",
+        "iconPath": "images/tabbar/user.png",
+        "selectedIconPath": "images/tabbar/user-selected.png"
+      }
+    ],
+    "backgroundColor": "#F7F7FA"
+  }
+}

@@ -1,0 +1,76 @@
+<view class='page' style='background-color:#E8F1FA'>
+  <loading hidden="{{isUploadding}}">
+    上传中，请稍等...
+  </loading>
+  <view class="modal-box" hidden="{{hideReasonListModal}}" bindtap="hideReasonListModal">
+    <view class="modal-body">
+      <view style='height:{{listHeight}};width:{{winWid}};margin-top:{{modalMarginTop}};background-color:white;z-index: 99999'>
+        <block wx:for='{{refundReasonList}}' wx:key='{{item.id}}'>
+      <!-- 商品信息 -->
+          <view class='reason-item-view' catchtap='chooseReasonItem' data-item='{{item}}' data-index='{{index}}'>
+            <text class='reason-item-title'>{{item.returnCauseDescription}}</text>
+            <image wx:if="{{currentSelectedIndex!=index||currentSelectedIndex==-1}}" src='../../images/user/reason_unselect.png' class='reason-item-select-status-image'></image>
+            <image wx:if="{{currentSelectedIndex==index&&currentSelectedIndex!=-1}}" src='../../images/user/reason_select.png' class='reason-item-select-status-image'></image>
+          </view>
+          <view class='common-separator common-zero-margin-top'></view>
+        </block>
+        <view class='close-modal-btn-view'>
+            <text class='close-modal-btn-text'>关闭</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='item-wrap-view'>
+    <text class='item-tite-text dark-text common-font-size'>退货数量：</text>
+    <text class='red-text common-font-size'>{{totalNum}}件</text>
+    <view class='refund-price-info-view'>
+      <text class='dark-text common-font-size' style=''>退款金额：</text>
+      <text class='red-text common-font-size' style='margin-right:3px;'>约{{totalPrice}}元</text>
+      <text class='light-text' style='font-size:11px;'>(以实际退款为准)</text>
+    </view>
+    </view>
+  <view class='common-separator common-zero-margin-top'></view>
+  <view class='refund-notice-wrap-view'>
+    <text class='refund-notice-text'>{{refundNotice}}</text>
+  </view>
+  <view class='common-five-separator common-zero-margin-top'></view>
+  <view class='item-wrap-view' bindtap='chooseReason'>
+    <text class='item-tite-text dark-text common-font-size'>退货原因</text>
+    <view class='choose-reason-btn-view'>
+      <text class='light-text common-font-size choose-reason-btn-text'>{{currentSelectedReason}}</text>
+      <view class='choose-available-area'>
+        <image src='../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+      </view>
+    </view>
+  </view>
+  <view class='common-separator common-zero-margin-top'></view>
+  <view class='common-five-separator common-zero-margin-top'></view>
+  <view class='refund-description-view'>
+    <text class='dark-text common-font-size' style='margin-left:6px'>退货说明</text>
+    <textarea placeholder='请输入退货说明' class='description-textarea' bindinput='descriptionInput' value='{{descriptionInput}}' wx:if='{{hideReasonListModal}}'></textarea>
+    <view style='width:100%;height:80px;background-color:white' wx:if='{{!hideReasonListModal}}'></view>
+  </view>
+  <view class='common-five-separator common-zero-margin-top'></view>
+  <view class='choose-photos-wrap-view'>
+    <view class='choose-photos-title-view'>
+      <text class='dark-text common-font-size choose-photos-title'>上传图片凭证(最多上传3张，长按可删除)</text>
+      <text class='red-text common-font-size choose-photos-title' wx:if='{{isShowNeedImageFlag}}'>(必填)</text>
+    </view>
+    <!-- takePhoto -->
+    <view class='photos-wrap-view'>
+      <view class='photo-item-view' bindtap='chooseOrDeletePhoto' data-index="{{1}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
+        <image src='{{image1}}' class='photo-item'></image>
+      </view>
+      <view class='photo-item-view' bindtap='chooseOrDeletePhoto' data-index="{{2}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
+        <image src='{{image2}}' class='photo-item'></image>
+      </view>
+      <view class='photo-item-view' bindtap='chooseOrDeletePhoto' data-index="{{3}}" bindtouchstart="mytouchstart" bindtouchend="mytouchend">
+        <image src='{{image3}}' class='photo-item'></image>
+      </view>
+    </view>
+  </view>
+  <view class='selected-product-info-wrap-view' bindtap='uploadExchangeInfo'>
+    <text style='color:white;font-size:15px'>提交</text>
+  </view>
+    
+</view>

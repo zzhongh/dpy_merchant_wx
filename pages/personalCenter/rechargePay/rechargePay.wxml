@@ -1,0 +1,28 @@
+<view class='page' style='background-color:#E8F1FA'>
+  <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading>
+  <view class='recharge-info-view'>
+    <text style='font-size:14px;color:#333333'>充值金额 ￥{{rechargeInfo.payablePrice}}</text>
+    <view style='height:6px'></view> 
+    <text style='font-size:14px;color:red'>赠送 ￥{{rechargeInfo.giftAmount}}</text>
+  </view>
+  <view class='common-five-separator common-zero-margin-top'></view>
+  <view class='item-wrap-view' bindtap='calling'>
+    <text class='item-tite-text'>请选择充值方式</text>
+  </view>
+  <view class='common-separator common-zero-margin-top'></view>
+  <view class='item-wrap-view' bindtap='selectPayMethod'>
+    <image src='../../../images/user/pay_weipay.png' class='item-image-view'></image>
+    <text class='item-tite-text'>微信支付</text>
+    <image wx:if='{{!isSelected}}' src='../../../images/user/pay_method_unselect.png' class='select-payMethod-icon'></image>
+    <image wx:if='{{isSelected}}' src='../../../images/user/pay_method_selected.png' class='select-payMethod-icon'></image>
+  </view>
+  <view class='common-five-separator common-zero-margin-top'></view>
+  <view class='recharge-pay-notice-wrap-view'>
+    <text class='recharge-pay-notice-text'>{{rechargePayNotice}}</text>
+  </view>
+  <view class='recharge-pay-btn-view' bindtap='rechargePay'>
+    <text class='recharge-pay-btn-text'>确认支付 ￥{{rechargeInfo.payablePrice}}元</text>
+  </view>
+</view>

@@ -1,0 +1,47 @@
+<view class='page' style='background-color:#E8F1FA'>
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for-items="{{tabs}}" wx:key="{{index}}">
+          <view style='background-color:white' id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+    </view>
+  </view>
+  <!-- 消费记录 -->
+  <view class="weui-tab__panel" wx:if='{{tradingRecord.length>0}}'>
+    <view class='common-five-separator common-zero-margin-top'></view>
+    <!-- 消费记录列表 -->
+    <scroll-view scroll-y="true">  
+      <block wx:for="{{tradingRecord}}" wx:for-item="value" wx:key="{{tradingRecord}}">
+        <view class='item-wrap-view' bindtap='goToOrderDetail' data-orderNo='{{value.orderNo}}'>
+          <!-- 图片 -->
+          <view class='item-type-view'>
+            <image class='item-type-image' src='{{value.typeIconUrl}}'>
+            
+            </image>
+            <text class='item-type-title'>{{value.type}}</text>
+          </view>
+          <!-- 内容 -->
+          <view class='item-type-content-view'>
+            <text class='item-type-content-title'>{{value.content}}</text>
+            <view style='height:16px'></view>
+            <text class='item-type-content-date'>{{value.tradingDateTime}}</text>
+          </view>
+          <!-- 值 -->
+          <view class='item-value-view'>
+            <text wx:if="{{value.amountSymbol=='-'}}" class='item-value-down'>{{value.amountSymbol}}{{value.amount}}</text>
+            <text wx:if="{{value.amountSymbol=='+'}}" class='item-value-up'>{{value.amountSymbol}}{{value.amount}}</text>
+          </view>
+        </view>
+        <view class='common-separator common-zero-margin-top'></view>
+      </block>
+      <view class="weui-loadmore weui-loadmore_line" bindtap="loadMore" >
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">{{isLoadedAllAuditDataText}}</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

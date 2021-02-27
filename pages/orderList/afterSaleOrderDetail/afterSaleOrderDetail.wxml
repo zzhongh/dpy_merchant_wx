@@ -1,0 +1,77 @@
+<view class='page' style='background-color:#E8F1FA'>
+  <scroll-view>
+    <view class='item-wrap-view'>
+      <text class='item-tite-text dark-text'>审核状态</text>
+      <text wx:if="{{orderInfo.status=='1'}}" class='item-value-text green-text'>{{orderInfo.statusStr}}</text>
+      <text wx:if="{{orderInfo.status=='0'}}" class='item-value-text orange-text'>{{orderInfo.statusStr}}</text>
+      <text wx:if="{{orderInfo.status=='2'}}" class='item-value-text red-text'>{{orderInfo.statusStr}}</text>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <block wx:for='{{orderInfo.refundOrderProductSnapshotList}}' wx:key='{{item}}'>
+      <view class='product-wrap-view'>
+        <image src='{{item.productPreviewImageURL}}' wx:if="{{item.productPreviewImageURL!=''}}" style='width:85px;height:80px'></image>
+        <image src='../../../images/order/img_loading.jpg' wx:if="{{item.productPreviewImageURL==''}}" style='width:85px;height:80px'></image>
+        <view class='product-content-view'>
+          <text class='dark-text common-font-size font-weight'>{{item.productName}}</text>
+          <text class='light-text common-font-size margin'>{{item.specificationName}}</text>
+          <text class='red-text common-font-size margin'>{{item.specificationUnitPrice}}元/{{item.unit}}x{{item.refundNum}}{{item.unit}}</text>
+        </view>
+      </view>
+      <view class='common-separator common-zero-margin-top'></view>
+    </block>
+    <view class='item-wrap-view'>
+      <text class='item-tite-text dark-text'>支付方式</text>
+      <text class='item-value-text red-text'>{{orderInfo.payMethodStr}}</text>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='item-wrap-view'>
+      <text class='item-tite-text dark-text'>申请时间</text>
+      <text class='item-value-text dark-text'>{{orderInfo.submitTimeStr}}</text>
+    </view>
+    <view class='common-five-separator common-zero-margin-top'></view>
+    <view class='item-wrap-view' wx:if="{{orderInfo.auditDateTime != null && orderInfo.auditDateTime != '' && orderInfo.status != '2' && orderInfo.status != '0'}}">
+      <text class='item-tite-text dark-text'>退款时间</text>
+      <text class='item-value-text red-text'>{{orderInfo.refundTimeStr}}</text>
+    </view>
+    <view class='common-separator common-zero-margin-top' wx:if="{{orderInfo.auditDateTime != null && orderInfo.auditDateTime != '' && orderInfo.status != '2' && orderInfo.status != '0'}}"></view>
+    <view class='item-wrap-view' >
+      <text class='item-tite-text dark-text'>退货数量</text>
+      <text class='item-value-text red-text'>{{orderInfo.totalRefundNum}}</text>
+    </view>
+    <!-- <view class='common-separator common-zero-margin-top' wx:if="{{orderInfo.status!='2'}}"></view>
+    <view class='item-wrap-view' wx:if="{{orderInfo.status!='2'}}">
+      <text class='item-tite-text dark-text'>订单总额</text>
+      <text class='item-value-text red-text'>{{orderInfo.refundPrice}}元</text>
+    </view> -->
+    <view class='common-separator common-zero-margin-top' wx:if="{{orderInfo.status!='2'}}"></view>
+    <view class='item-wrap-view' wx:if="{{orderInfo.status!='2'}}">
+      <text class='item-tite-text dark-text'>退款金额</text>
+      <text class='item-value-text red-text'>{{orderInfo.refundPrice}}元</text>
+    </view>
+    <view class='common-separator common-zero-margin-top' wx:if="{{orderInfo.status!='2'}}"></view>
+    <view class='item-wrap-view' wx:if="{{orderInfo.status!='2'}}">
+      <text class='item-tite-text dark-text'>退还红包</text>
+      <text class='item-value-text red-text'>{{orderInfo.refundRedPacketAmount}}元</text>
+    </view>
+    <view class='common-separator common-zero-margin-top' wx:if="{{orderInfo.status!='2'}}"></view>
+    <view class='item-wrap-view' wx:if="{{orderInfo.status!='2'}}">
+      <text class='item-tite-text dark-text'>退还积分</text>
+      <text class='item-value-text red-text'>{{orderInfo.refundPointAmount}}积分</text>
+    </view>
+    <view class='common-separator common-zero-margin-top' wx:if="{{orderInfo.status!='2'}}"></view>
+    <view class='item-wrap-view' wx:if="{{orderInfo.status!='2'}}">
+      <text class='item-tite-text dark-text'>手续费</text>
+      <text class='item-value-text red-text'>{{orderInfo.poundageAmount}}元</text>
+    </view>
+    <view class='common-separator common-zero-margin-top' wx:if="{{orderInfo.status!='2'}}"></view>
+    <view class='item-wrap-view' wx:if="{{orderInfo.status!='2'}}">
+      <text class='item-tite-text dark-text'>退还运费</text>
+      <text class='item-value-text red-text'>{{orderInfo.returnShippingPrice}}元</text>
+    </view>
+    <view class='common-separator common-zero-margin-top' wx:if="{{orderInfo.status!='2'}}"></view>
+    <view class='audit-wrap-view' wx:if="{{orderInfo.auditDescription!=''&&orderInfo.auditDescription!=null}}">
+      <text class='dark-text common-font-size'>批语 : {{orderInfo.auditDescription}}</text>
+    </view>
+    <view class='common-separator common-zero-margin-top' wx:if="{{orderInfo.status!='2'}}"></view>
+  </scroll-view>
+</view>

@@ -1,0 +1,33 @@
+/* pages/personalCenter/aboutUs/aboutUs.wxss */
+.introduction-view{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  width:90%;
+  margin-left:5%
+}
+.introduction-text{
+  font-size:13px;
+  color:#333333;
+  text-indent:20rpx;
+  text-align: left;
+  margin-left:4px
+}
+.img{
+  width:30%;
+  margin-left:35%;
+  margin-top:20px
+}
+.version-text{
+  font-size:13px;
+  color:#333333;
+  text-indent:20rpx;
+  text-align: left;
+}
+.version-view{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  width:100%;
+  text-align: center
+}

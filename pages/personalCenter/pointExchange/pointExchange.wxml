@@ -1,0 +1,51 @@
+<view class='page' style='background-color:#E8F1FA'>
+  <!-- 积分信息 -->
+  <view class='points-info-wrap-view'>
+    <view class='points-info-content-view'>
+      <image src='../../../images/user/score_jifen_img.png'class='points-info-image'></image>
+      <text class='points-info-text'>云钻积分：{{points}}</text>
+    </view>
+  </view>
+  <!-- 兑换列表 -->
+  <scroll-view style='margin-top:8px'>
+    <block wx:for="{{redPacketList}}" wx:for-item="value" wx:key="{{redPacketList}}">
+      <view class='item-wrap-view'>
+          <!-- 图片 -->
+          <view class='item-type-view'>
+            <image class='item-type-image' src='../../../images/user/redpacket_unuse.png'></image>
+          </view>
+          <!-- 内容 -->
+          <view class='item-type-content-view'>
+            <view class='redPacket-type-and-amount-wrap-view'>
+              <text class='item-type-content-title'>{{value.amount}}元积分红包</text>
+            </view>
+            <text class='use-condition'>满{{value.amountCondition}}元可使用</text>
+            <text class='exchange-condition-text'>需{{value.exchangePoint}}积分兑换</text>
+          </view>
+          <!-- 图片 -->
+          <view class='item-type-view' bindtap='exchange' data-item='{{value}}'>
+            <image class='item-image' src='../../../images/user/item_score_chage_img.png'></image>
+          </view>
+        </view>
+      <view class='common-five-separator common-zero-margin-top'></view>
+    </block>
+  </scroll-view>
+  <!-- //弹出层内容-->
+  <view class="modal-box" hidden="{{showExchangeSuccessModal}}" bindtap="hideExchangeSuccessModal">
+    <view class="modal-body">
+      <!-- <view class='exchange-success-modal-content' style='height:{{modalH}};margin-top:{{modalMarginTop}};background-image: url(http://images.dongpinyun.com/recharge_success_20180808092706.png);'>
+        <view style='height:24px;width:100%'></view>
+        <text class='exchange-success-text'>恭喜您成功兑换了{{currentSelectedExchangeRedPacketInfo.amount}}元红包</text>
+        <text class='exchange-success-text'>您可以在付款的时候选择红包立减</text>
+     </view> -->
+     <image class='exchange-success-modal-content' src='../../../images/user/exchange_redpacket_bg.png' style='height:{{modalH}};margin-top:{{modalMarginTop}};'>
+     </image>
+     <view class='modal-content-text-view' style='position:fixed;left:15%;top:{{modalTextContentMarginTop}}'>
+      <view style='height:24px;width:100%'></view>
+      <text class='exchange-success-text'>恭喜您成功兑换了{{currentSelectedExchangeRedPacketInfo.amount}}元红包</text>
+      <text class='exchange-success-text'>您可以在付款的时候选择红包立减</text>
+     </view>
+
+    </view>
+  </view>
+</view>

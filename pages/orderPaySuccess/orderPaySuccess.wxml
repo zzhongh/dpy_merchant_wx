@@ -1,0 +1,17 @@
+<view class="content">
+  <!-- <view class='content'> --> 
+    <view class='background_view'>
+      <image src='../../images/order/order_pay_success_bg.png' class="background_img"></image>
+      <image src='../../images/order/order_pay_success.png' class="success_img" mode='scaleToFill'></image>
+      <view class="success_text">{{payMethod}}</view>
+      <view class="payable_price">共支付：{{payablePrice}}元</view>
+      <image src='../../images/order/order_pay_success_money.png' class="money_img"></image>
+    </view>
+    <view class="recharge_info1">最高可返500元</view>
+    <view class="recharge_info2">充值立返现  积分换红包</view>
+    <view class="to_recharge_buttom" bindtap='goRecharge'>去充值</view>
+    <view class="to_home_buttom" bindtap='goHome'>回到首页</view>
+    <view class="to_order_buttom" bindtap='goOrderList'>我的订单</view>
+  <!-- </view> -->
+</view>
+

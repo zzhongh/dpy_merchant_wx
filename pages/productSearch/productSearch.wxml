@@ -1,0 +1,46 @@
+<view class="content">
+  <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading>
+  <!-- 顶部搜索 -->
+  <view class='search_bg'>
+    <view class='search_border'>
+      <image src='../../images/category/search_logo.png' class='search_icon'></image>
+      <input class='search_input' placeholder='请输入商品名称' bindinput='input'>{{inputStr}}</input>
+    </view>
+    <view class='search_bt' bindtap='search'>搜索</view>
+  </view>
+  <view style='width:100%' hidden='{{isShowKeyWordList}}'>
+    <view style='width:100%' hidden='{{searchHistory == false}}'>
+      <view class='search_history'>
+        <text class='search_title'>历史搜索</text>
+        <image src='../../images/common/delete_img.png' class='search_img' bindtap='clearHistory'></image>
+      </view>
+      <view class='search_history_view' bindtap='historyClick'>
+        <block wx:for='{{searchHistory}}' wx:key='{{item}}'>
+          <view class='search_history_item' bindtap='itemClick' data-hi='{{item}}'>{{item}}</view>
+        </block>
+      </view>
+      
+    </view>
+    <view style='width:100%' hidden='{{hotSearch == false}}'>
+      <view class='search_history'>
+        <text class='search_title'>热门搜索</text>
+      </view>
+      <view class='search_history_view' bindtap='hotClick'>
+        <block wx:for='{{hotSearch}}' wx:key='{{item.id}}'>
+          <view class='search_history_item' bindtap='itemClick' data-hi='{{item.keyword}}'>{{item.keyword}}</view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view style='width:100%' hidden='{{!isShowKeyWordList}}'>
+    <scroll-view scroll-y="true" >
+      <block wx:for='{{keyWordList}}' wx:key='{{item}}'>
+        <view class='key_word_item' bindtap='itemClick' data-hi='{{item}}'>{{item}}</view>
+      </block>
+    </scroll-view>
+  </view>
+  
+</view>
+

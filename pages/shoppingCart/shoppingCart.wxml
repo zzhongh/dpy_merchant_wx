@@ -1,0 +1,88 @@
+<view class='page' style=''>
+  <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading>
+  <modal wx:if="{{showQuantityModal}}" class='update-quantity-modal-view' bindcancel="modalCancel" bindconfirm='modalConfirm'>
+    <view class='update-quantity-title-view'>请输入您要购买的数量</view>
+    <input value='{{currentSelectedProduct.quantity}}' type="number" maxlength='3' class='update-quantity-input' bindinput ="quantityInput"></input>
+  </modal>
+  
+  <scroll-view scroll-y="true" class='scrollview' wx:if='{{shoppingCartProducts.length>0}}'>
+  <view class='wx_pay_modal_box' wx:if='{{isShowWxModal}}'>
+    <view class='wx_pay_modal_content'>
+      <view class='wx_pay_modal_title'>温馨提示</view>
+      <view class='wx_pay_modal_title'>状态已过期，请重新登录</view>
+      <view class='wx_pay_modal_buttoms'>
+        <!-- <view class='wx_pay_modal_left_buttom' bindtap='logoutModalCancel'>未支付</view> -->
+        <view class='wx_pay_modal_right_buttom' bindtap='logoutModalConfirm'>确定</view>
+      </view>
+    </view>
+  </view>
+    <block wx:for="{{shoppingCartProducts}}" wx:for-item="value" wx:key="{{shoppingCartProducts}}">
+      <view class='product-wrap-view' data-item='{{value}}'>
+        <!-- 商品名称 -->
+        <view class='productName-wrap-view'>
+          <text class='productName-text'>{{value.productName}}</text>
+          <view class='delete-btn-wrap-view' bindtap='deleteProductAction' data-item='{{value}}' data-index="{{index}}" wx:if='{{!isShowWxModal}}'>
+            <text class='delete-btn-text'>删除</text>
+          </view>
+        </view>
+        <!-- 商品信息 --> 
+        <view class='product-content-view'>
+          <view class='select-btn-view' bindtap='changeSelectStatus' data-item='{{value}}' data-index="{{index}}">
+            <image wx:if='{{!value.isSelected}}' src='../../images/shoppingCart/shopcart_unselect.png' class='select-item-image'></image>
+            <image wx:if='{{value.isSelected}}' src='../../images/shoppingCart/shopcart_selected.png' class='select-item-image'></image>
+          </view>
+          <view class='product-image-view'>
+            <image src='{{value.productPreviewImageURL}}' class='product-image' wx:if="{{value.productPreviewImageURL!=''&&value.productPreviewImageURL!=null}}"></image>
+            <image src='../../images/order/img_loading.jpg' 
+                  class='product-image' wx:else></image>
+          </view> 
+          <view class='product-info-view'>
+            <view class='brandName-areaName-wrap-view'>
+              <text class='brandName-text' wx:if='{{value.areaName!=null}}'>{{value.areaName}}</text>
+              <text class='brandName-text' wx:if='{{value.brandName!=null}}'> {{value.brandName}}</text>
+            </view>
+            <text class='price-text'>{{value.specificationPrice}}元/{{value.specificationUnit}}</text>
+            <text class='specificationName-text'>{{value.specificationName}}/{{value.specificationUnit}}</text>
+            <view class='update-quantity-wrap-view'>
+              <view class='add-quantity-view' bindtap='minus' data-item='{{value}}' data-index="{{index}}">-</view>
+              <view class='quantity-view' bindtap='update' data-item='{{value}}' data-index="{{index}}">{{value.quantity}}</view>
+              <view class='minus-quantity-view' bindtap='add' data-item='{{value}}' data-index="{{index}}">+</view> 
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='common-five-separator common-zero-margin-top'></view>
+    </block>
+    <view style='width:100%;height:50px' wx:if="{{deviceType=='iPhone'}}"></view>
+  </scroll-view>
+  <!-- 底部结算相关信息 -->
+  <view class='common-separator' style='position:fixed;bottom:45px;' wx:if='{{!isShowWxModal && shoppingCartProducts.length>0}}'></view>
+  <view class='selected-product-info-wrap-view' wx:if='{{!isShowWxModal && shoppingCartProducts.length>0}}'>
+    <view class='select-all-image-wrap-view' bindtap='selectAll'>
+      <image wx:if='{{!isSelectAll}}' src='../../images/shoppingCart/shopcart_unselect.png' class='select-all-image'></image>
+      <image wx:if='{{isSelectAll}}' src='../../images/shoppingCart/shopcart_selected.png' class='select-all-image'></image>
+    </view>
+    <view class='selected-total-info-view'>
+      <view class='select-all-text-view'>
+        <text>全选</text>
+      </view>
+      <view class='selected-total-price-view'>
+        <text>合计:</text>
+        <text class='selected-total-price-text'>{{totalPrice}}元</text>
+      </view>
+    </view>
+    <view class='order-view' bindtap='order'>
+      <text class='order-text'>去结算</text>
+    </view>
+  </view>
+  <!-- 列表为空时 -->
+  <view class='list-is-empty-view' wx:if='{{shoppingCartProducts.length==0}}'>
+    <image class='item-type-image' src='../../images/shoppingCart/cart.png'></image>
+    <text class='list-is-empty-view-text'>您的购物车里还没有商品哦</text>
+    <view class='go-to-exchange-btn-view' bindtap='goToCategory'>
+      <text class='go-to-exchange-btn-text'>去逛逛</text>
+    </view>
+  </view>
+</view>

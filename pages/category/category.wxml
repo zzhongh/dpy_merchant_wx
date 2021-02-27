@@ -1,0 +1,124 @@
+<!--pages/dataCenter/dataCenter.wxml-->
+<view class='content'>
+  <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading>
+  <modal wx:if="{{showQuantityModal}}" class='update-quantity-modal-view' bindcancel="modalCancel" bindconfirm='modalConfirm'>
+    <view class='update-quantity-title-view'>请输入您要购买的数量</view>
+    <input value='{{selecteEditProductInfo.num}}' type="number" class='update-quantity-input' bindinput='editInput'></input>
+  </modal>
+  <!-- <view class='search_bg'>
+      <image src='../../images/category/dongpinyun_logo.png' class='logo_img'></image>
+      <view class='search_border' bindtap='goToSearch'>
+        <image src='../../images/category/search_logo.png' class='search_icon'></image>
+        <text class='search_text'>请输入商品名称</text>
+      </view>
+    </view> -->
+
+    <view class='category_content'>
+      <!-- 左侧一级分类 --> 
+      <scroll-view class='category_left' scroll-y="true" >
+        <block wx:for='{{dataList}}' wx:key="item.id">
+          <view class="{{categoryListIndex == index ? 'category_left_selected_item' : 'category_left_item'}}" data-index='{{index}}' 
+          data-id='{{item.id}}' bindtap='clickLeftList'>{{item.name}}</view>
+        </block>
+      </scroll-view>
+  <!-- bindscrolltoupper='refresh' -->
+      <view class='category_right_view'>
+        <view class='product_list_head' hidden='{{isCategoryGroupShow}}'>
+          <view class='product_list_head_go_back' bindtap='goBack'>
+            <image src='../../images/category/arr_left_black.png' class='product_list_head_go_back_img'></image>
+            <text class='product_list_head_go_back_text'>上一级</text>
+          </view>
+          <view class='product_list_head_sort'>
+            <view class='product_list_head_sort_title' bindtap='sort'>
+              {{sortTitle}}
+            </view>
+            <image class='product_list_head_sort_img' src='../../images/category/product_sort_img.png'></image>
+          </view>
+          
+        </view>
+
+        <!-- bindscrolltoupper='refresh' bindscrolltolower='loadMore' -->
+        <scroll-view class='category_right' scroll-y="true" bindscrolltoupper='refresh' bindscrolltolower='loadMore'>
+          <!-- 右侧二级分类 -->
+          <view class='category_right_group' wx:for='{{!isCategoryGroupShow || dataList[categoryListIndex].groups}}' wx:key="item.id" 
+            hidden='{{!item.subCategoryList.length > 0}}'>
+            <view class='group_title'>{{item.groupName}}</view>
+            <view class='groups'>
+              <view class='group_item' wx:for='{{item.subCategoryList}}' wx:key="item.id">
+                <image class='img' src="{{item.previewImageURL==''||item.previewImageURL==null?'../../images/order/img_loading.jpg':item.previewImageURL}}"  bindtap='groupItemClick' data-id='{{item.id}}'></image>
+                <text>{{item.name}}</text>
+            </view>
+            </view>
+          </view>
+          <!-- 右侧三级分类 -->
+          <view class='right_product_list'hidden='{{isCategoryGroupShow}}'>
+            <block wx:for='{{productList}}' wx:key="item.id" wx:for-index='idx'>
+            <!-- 商品信息 -->
+              <view class='product_list_item' bindtap='gotoProductDetail' data-index='{{idx}}'>
+                <image src='{{item.productPreviewImageURL}}' class='product_list_item_img' wx:if="{{item.productPreviewImageURL!=''&&item.productPreviewImageURL!=null}}"></image>
+                <image src='../../images/order/img_loading.jpg' 
+                  class='product_list_item_img' wx:else></image>
+                <view class='product_list_item_product_info'>
+                  <text class='product_list_item_product_name'>{{item.name}}</text>
+                  <view class='product_list_item_price_and_collection'>
+                    <view class='product_list_item_product_price_str'wx:if='{{isShowPrice}}'>{{item.priceStr}}</view>
+                    <view class='product_list_item_product_price_str'wx:else>价格登录可见</view>
+                    <image class='product_list_item_product_collection_img' catchtap='collectClick' data-id='{{item.id}}'
+                      data-hi='{{idx}}' src='{{item.isCollected ? collectedImg : unCollectedImg}}'></image>
+                  </view>
+                </view>
+              </view>
+              <!-- 规格信息 -->
+              <block wx:for='{{item.productSpecificationList}}' wx:key="item.id">
+                <view class='product_list_item_specification_item'>
+                  <view class="{{item.quantity >= 1 ? 'product_list_item_specification_item_name' : 'product_list_item_specification_item_name_none' }}">{{item.name}}</view>
+                  <view class='product_list_item_specification_item_price_and_num'>
+                    <view wx:if='{{isShowPrice}}'>
+                      <text class="{{item.quantity >= 1 ? 'product_list_item_specification_item_price' : 'product_list_item_specification_item_price_none' }}">￥{{item.price}}</text>
+                      <text class="{{item.quantity >= 1 ? 'product_list_item_specification_item_unit' : 'product_list_item_specification_item_unit_none' }}">/{{item.unit}}</text>
+                    </view>
+                    <view wx:else class='product_list_item_specification_item_price'>价格登录可见</view>
+                    <!-- 编辑购买数量 -->
+                    <view class='product_list_item_specification_item_cart_num' wx:if='{{item.quantity >= 1}}'>
+                      <image src='../../images/common/icon_subcart.png' class='product_list_item_specification_item_add_and_sub_img' 
+                          hidden='{{!item.hasInShoppingCart}}' bindtap='subNum' data-hi='{{item.shoppingCartNum}}'
+                          data-id='{{item.id}}' data-pIndex='{{idx}}' data-sIndex='{{index}}'></image>
+                      <view class='product_list_item_specification_item_input' bindtap='editNum' data-id='{{item.id}}
+                          hidden='{{!item.hasInShoppingCart}}'data-pindex='{{idx}}' data-hi='{{item.shoppingCartNum}}'
+                          data-sindex='{{index}}'>{{item.shoppingCartNum}}</view>
+                      <image src='../../images/common/icon_addcart.png'               
+                          class='product_list_item_specification_item_add_and_sub_img' bindtap='addNum' data-id='{{item.id}}' 
+                          data-hi='{{item.shoppingCartNum}}' data-pindex='{{idx}}' data-sindex='{{index}}'></image>
+                    </view>
+                    <view class='product_list_item_specification_item_insert_subscribeStock' wx:else data-id='{{item.id}}'
+                          bindtap='insertSubscribeStock' data-pindex='{{idx}}'>加入到货通知</view>
+                  </view>
+                </view>
+              </block>
+            </block>
+          </view>
+        </scroll-view>
+      </view>
+      
+    </view>
+  <view class='modal_box' hidden="{{flag}}" bindtap="hide">
+    <view class='modal-body'>
+      <view class='modal-content'>
+        <view class="{{0 == sortIndex ? 'modal_item_selected' :'modal_item'}}" bindtap='sortProductList' 
+          data-index='0'>{{sortData[0].name}}</view>
+        <view class='line_view'></view>
+        <view class="{{1 == sortIndex ? 'modal_item_selected' :'modal_item'}}" bindtap='sortProductList' 
+          data-index='1'>{{sortData[1].name}}</view>
+        <view class='line_view'></view>
+        <view class="{{2 == sortIndex ? 'modal_item_selected' :'modal_item'}}" bindtap='sortProductList' 
+          data-index='2'>{{sortData[2].name}}</view>
+        <view class='line_view'></view>
+        <view class="{{3 == sortIndex ? 'modal_item_selected' :'modal_item'}}" bindtap='sortProductList' 
+          data-index='3'>{{sortData[3].name}}</view>
+      </view>
+    </view>
+    
+  </view>
+</view>

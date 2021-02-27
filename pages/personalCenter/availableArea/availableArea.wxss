@@ -1,0 +1,13 @@
+/* pages/personalCenter/availableArea/availableArea.wxss */
+.area-item-view{
+  height:35px;
+  background-color:white;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+}
+.area-text{
+  font-size:14px;
+  margin-left:6px;
+  color: #333333
+}

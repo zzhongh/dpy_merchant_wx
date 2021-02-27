@@ -1,0 +1,95 @@
+.content{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding:20rpx;
+}
+page{
+  background-color: #F4F5F7;
+}
+.mark_view{
+  background-color: white;
+  width: 100%;
+}
+.scroll_view{
+  display: flex;
+  align-items: center;
+}
+.text_area{
+  width: 100%;
+  height: 230rpx;
+  font-size: 30rpx;
+  padding:10rpx;
+}
+.font_num{
+  font-size: 28rpx;
+  padding-left: 10rpx;
+}
+.search_clear{
+  display: flex;
+  flex-direction: row;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  align-items: center;
+  background-color: white;
+  height: 80rpx;
+  width: 230rpx;
+  margin-top: 30rpx;
+}
+.history_list{
+  width: 100%;
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.search_clear_img{
+  height: 30rpx;
+  width: 30rpx;
+}
+.search_clear_text{
+  font-size: 30rpx;
+  background-color: white;
+  
+  
+}
+.search_history_none{
+  height: 80rpx;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30rpx;
+}
+.bottom_entry{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #219ff7;
+  font-size: 30rpx;
+  height: 80rpx;
+  color: white;
+  text-align: center;
+  line-height: 80rpx;
+}
+.history_item_view{
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  margin-top: 1rpx;
+  width: 95%;
+}
+.history_item{
+  width: 100%;
+  font-size: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

@@ -1,0 +1,100 @@
+/* pages/personalCenter/transactionRecords/transactionRecords.wxss */
+.item-wrap-view{
+  width:100%;
+  height:80px;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+  background-color: white
+}
+.item-type-view{
+  width:22%;
+  align-items:center;
+  display: flex;
+  flex-direction: column;
+}
+.item-type-image{
+  width:50px;
+  height:50px;
+}
+.item-type-title{
+  font-size:12px;
+  color:#666666;
+  margin-top:6px
+}
+.item-type-content-view{
+  width:56%;
+  display: flex;
+  flex-direction: column;
+  align-items:left;
+}
+.item-type-content-title{
+  font-size:12px;
+  color:#666666;
+  height:50%;
+  margin-left: 6px
+}
+.item-type-content-date{
+  font-size:12px;
+  color:#c6c6c6;
+  height:50%
+}
+.item-value-view{
+  width:22%;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+}
+.item-value-down{
+  font-size:12px;
+  color:#c6c6c6;
+}
+.item-value-up{
+  font-size:12px;
+  color:red;
+}
+.redPacket-type-and-amount-wrap-view{
+  display: flex;
+  flex-direction: row;
+  align-items: center
+}
+.redPacket-type-wrap-view{
+  width:50px;
+  height:18px;
+  border-radius:4px;
+  background-color:red;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+}
+.redPacket-type-title-text{
+  color:white;
+  font-size:11px
+}
+.list-is-empty-view{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height:100%;
+  width:100%;
+  justify-content: center;
+}
+.list-is-empty-view-text{
+  color:#666666;
+  font-size:14px;
+  margin-top: 6px
+}
+.go-to-exchange-btn-view{
+  width:74px;
+  height:28px;
+  border: 1rpx solid red;
+  border-radius:6px;margin-top:6px;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+}
+.go-to-exchange-btn-text{
+  font-size: 14px;
+  color: red
+}

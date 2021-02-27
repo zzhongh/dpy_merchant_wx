@@ -1,0 +1,127 @@
+/* pages/personalCenter/deliveryAddress/deliveryAddress.wxss */ 
+.address-info-view{
+  width:100%;
+  /* height:50px */
+}
+.consigneeName-consigneePhone-wrap-view{
+  width:100%;
+  height:30px;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+}
+.consigneeName-text{
+  margin-left:6px;
+  width:50%;
+  font-size:13px;
+  color: #333333
+}
+.consigneeName-selected-text{
+  margin-left:6px;
+  width:50%;
+  font-size:13px;
+  color: orange
+}
+.consigneeTelephone-text{
+  margin-right:6px;
+  text-align:right;
+  width:50%;
+  color:#333333;
+  font-size:13px
+}
+.consigneeTelephone-selected-text{
+  margin-right:6px;
+  text-align:right;
+  width:50%;
+  color:orange;
+  font-size:13px
+}
+.address-description-view{
+  width:98%;
+  margin-left: 1%
+  /* height:50% */
+}
+.address-description-text{
+  margin-left:6px;
+  font-size:13px;
+  color:#333333;
+}
+.address-selected-description-text{
+  margin-left:6px;
+  font-size:13px;
+  color:orange;
+}
+.operation-wrap-view{
+  width:100%;
+  height:30px;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+}
+.set-default-address-view{
+  width:60%;
+  height:100%;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+}
+.set-default-address-image{
+  width:16px;
+  height:16px;
+  margin-left:6px
+}
+.set-default-address-text{
+  font-size:12px;
+  color:#333333;
+  margin-left:6px
+}
+.default-address-text{
+  font-size:12px;
+  color:red;
+  margin-left:6px
+}
+.modify-address-image{
+  width:14px;
+  height:14px;
+}
+.delete-address-image{
+  width:16px;
+  height:16px;
+}
+.operation-text{
+  font-size:12px;
+  color:#333333;
+  margin-left: 3px
+}
+.modify-and-delete-wrap-view{
+  width:40%;
+  height:100%;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+}
+.modify-view{
+  width:50%;
+  height:100%;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+}
+.delete-view{
+  width:50%;
+  height:100%;
+  display: flex;
+  flex-direction: row;
+  align-items:center;
+}
+.add-new-address-view{
+  width:100%;
+  height:45px;
+  background-color:red;
+  display: flex;
+  flex-direction: row;
+  position:fixed;
+  bottom:0;
+  justify-content: center;
+  align-items:center;
+}

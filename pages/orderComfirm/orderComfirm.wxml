@@ -1,0 +1,122 @@
+<view class="">
+  <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading>
+  <scroll-view scroll-y='true' class="scroll_view" >
+  <!-- 地址信息  -->
+    <view class='address_view' bindtap='chooseAddress'>
+      <view class='addres_info' wx:if='{{defaultDeliveryAddress}}'>
+        <view class='address_name_and_phone'>
+          <text class='address_consignee_name'>收货人:{{defaultDeliveryAddress.consigneeName}}</text>
+          <text class='address_consignee_phone'>{{defaultDeliveryAddress.consigneeTelephone}}</text>
+        </view>
+        <view class='addres_consignee_address'>收货地址:{{defaultDeliveryAddress.consigneeAddress}}</view>
+      </view>
+      <view class='address_none' wx:else>
+        <image class='add_address_img' src='../../images/common/icon_addcart.png'></image>
+        <view class='address_consignee_name'>新增收货地址</view>
+      </view>
+      <image src='../../images/common/back-arrow-right-gray.png' class='address_right_img'></image>
+    </view>
+    <image src='../../images/order/address_buttom_img.png' class='address_bottom_img' mode='scaleToFill'></image>
+    <!-- 配送时间 -->
+    <view class='appoints_delivery_time_view' bindtap='chooseTime'>
+      <view class='appoints_delivery_time_content'>
+        <view class='address_consignee_name'>预约送达时间</view>
+        <view class='time_view'>{{selectedApointsTime}}</view>
+      </view>
+      <image src='../../images/common/back-arrow-right-gray.png' class='address_right_img'></image>
+    </view>
+    <view class='time_stats'>{{timeState}}</view>
+    <!-- 商品金额 -->
+    <view class='product_price_view'>
+      <view class='product_price_str'>商品总额</view>
+      <view class='product_price'>{{orderComfirmData.productPrice}}元</view>
+    </view>
+    <!-- 运费 --> 
+    <view class='shipping_price_view'>
+      <view class='shippingPrice_view'>
+        <view class='product_price_str'>运费</view>
+        <view class='total_weight_view'>(总重:{{orderComfirmData.totalWeight}}kg)</view>
+      </view>
+      <view class='product_price'>+{{orderComfirmData.shippingPrice}}元</view>
+    </view>
+    <!-- 红包 -->
+    <view class='product_price_view' bindtap='toSelectRedPacket'>
+      <view class='shippingPrice_view'>
+        <view class='product_price_str'>使用红包: </view>
+        <view class='red_packet_name_view'> {{redPacketName}}</view>
+      </view>
+      
+      <view class='red_packeg_view'>
+        <view class="{{merchantRedPackets.length > 0 ? 'use_packeg_str' : 'use_packeg_none_str'}}" >{{useRedPacket}}</view>
+        <image src='../../images/common/back-arrow-right-gray.png' class='address_right_img'></image>
+      </view>
+    </view>
+    <!-- 积分 -->
+    <view class='shipping_price_view'>
+      <view class='product_price_str'>可用{{points}}积分</view>
+      <view class='red_packeg_view'>
+        <text class='points_deduction_str' hidden='{{pointeDeductionPrice <= 1}}'>{{pointeDeductionPrice}}元</text>
+        <checkbox-group bindchange="checkboxChange" hidden='{{points <= 0}}'>
+          <checkbox checked='{{isSelectedPoints}}'></checkbox>
+        </checkbox-group>
+      </view>
+    </view>
+    <!-- 备注 -->
+    <view class='marke_view' bindtap='remarks'>
+      <view class='marke_str'>备注：</view>
+      <view class='marks_content'>{{remarkeStr == '' ? '请输入您的其他要求' : remarkeStr}}</view>
+      <!-- <view class='marke_view'>
+        
+      </view> -->
+      <image src='../../images/common/back-arrow-right-gray.png' class='remarks_right_img'></image>
+    </view>
+    <!-- 购买的商品列表 -->
+    <view class='product_list_view'>
+      <block wx:for='{{orderComfirmData.latestProductInfoList}}' wx:key='{{item.id}}'>
+        <view class='product_lits_item'>
+          <image src="{{item.productPreviewImageURL==''||item.productPreviewImageURL==null?'../../images/order/img_loading.jpg':item.productPreviewImageURL}}" class='product_img'></image>
+          <view class='product_info'>
+            <text class='product_name'>{{item.productName}}</text>  
+            <text class='product_specification'>{{item.specificationName}}/{{item.specificationUnit}}</text>
+            <view class='product_unit_price_view'>
+              <view class='product_unit_price'>{{item.specificationPrice}}元/{{item.specificationUnit}}</view>
+              <view class='product_unit'>X {{item.quantity}}{{item.specificationUnit}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view wx:if="{{deviceType=='iPhone'}}" style='width:100%;height:130rpx;'></view>
+  </scroll-view>
+  <view class='total_price_and_confirm'>
+    <view class='total_price_view'>应付金额:{{payablePrice}}元</view>
+    <view class='to_pay' bindtap='toPay'>提交订单</view>
+  </view>
+  <!-- 选择时间的modal -->
+  <view class='modal_box' hidden="{{flag}}" bindtap="hide">
+  <!-- 这下面两个view的catchtap是为了防止点击事件的冒泡 -->
+    <view class='modal-body' catchtap='ee'>
+      <view class='modal-content' catchtap='dd'>
+        <view class='select_time_title'>预约送达时间</view>
+        <view class='date_and_time_list'>
+          <view class='date_view'>
+            <block wx:for='{{orderComfirmData.availableAppointDay}}'>
+              <view class="{{item.isSelected ? 'selected_date_str' : 'date_str'}}" 
+                catchtap='clickDate' data-index='{{index}}'>{{item.date}}</view>
+            </block>
+          </view>
+          <view class='time_list_view'>
+            <block wx:for='{{orderComfirmData.availableAppointDay[selectedDateIndex].availableTime}}'>
+              <view class="{{item.isSelected ? 'selected_date_str' : 'date_str'}}" 
+                bindtap='clickTime' data-index='{{index}}'>{{item.name}}</view>
+            </block>
+          </view>
+        </view>
+        <image src='../../images/order/pop_cancle.png' class='modal_img' catchtap='hide'></image>
+      </view>
+    </view>
+  </view>
+</view>
+

@@ -1,0 +1,80 @@
+<view class='content'>
+  <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading>
+  <modal wx:if="{{showQuantityModal}}" class='update-quantity-modal-view' bindcancel="modalCancel" bindconfirm='modalConfirm'>
+    <view class='update-quantity-title-view'>请输入您要购买的数量</view>
+    <input value='{{selecteEditProductInfo.num}}' type="number" class='update-quantity-input' bindinput='editInput'></input>
+  </modal>
+  <scroll-view scroll-y="true" style='height:100%;'>
+    <swiper class="swiper_box" indicator-dots="{{indicatorDots}}"
+            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}"
+            indicator-color="#fff" indicator-active-color="red">
+        <block wx:for="{{productDetailImageURLs}}" wx:key="item.id">
+          <swiper-item>
+            <block wx:if="{{item}}">
+              <image class="banner_img" src="{{item}}"  mode="aspectFill"/>
+            </block>
+            <block wx:else>
+              <image src="../../images/default_pic.png" mode="aspectFill"></image>
+            </block>
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class='product_name_and_collect'>
+        <view class='product_name'>{{productData.name}}</view>
+        <view class='product_collect'>
+          <image class='product_collect_img' catchtap='collectClick' 
+                 src='{{productData.isCollected ? collectedImg : unCollectedImg}}'></image>
+          <text class='product_collect_str'>{{collectStr}}</text>
+        </view>
+      </view>
+      <!-- 规格信息 -->
+      <block wx:for='{{productData.productSpecificationList}}' wx:key="item.id">
+        <view class='product_list_item_specification_item'>
+          <view class="{{item.quantity >= 1 ? 'product_list_item_specification_item_name' : 'product_list_item_specification_item_name_none' }}">{{item.name}}</view>
+          <view class='product_list_item_specification_item_price_and_num'>
+            <view wx:if='{{isShowPrice}}'>
+              <text class="{{item.quantity >= 1 ? 'product_list_item_specification_item_price' : 'product_list_item_specification_item_price_none' }}">￥{{item.price}}</text>
+              <text class="{{item.quantity >= 1 ? 'product_list_item_specification_item_unit' : 'product_list_item_specification_item_unit_none' }}">/{{item.unit}}</text>
+            </view>
+            <view wx:else class='product_list_item_specification_item_price'>价格登录可见</view>
+            <!-- 编辑购买数量 -->
+            <view class='product_list_item_specification_item_cart_num' wx:if='{{item.quantity >= 1}}'>
+              <image src='../../images/common/icon_subcart.png' class='product_list_item_specification_item_add_and_sub_img' 
+                  hidden='{{!item.hasInShoppingCart}}' bindtap='subNum' data-hi='{{item.shoppingCartNum}}'
+                  data-id='{{item.id}}' data-sIndex='{{index}}'></image>
+              <view class='product_list_item_specification_item_input' bindtap='editNum' data-id='{{item.id}}
+                  hidden='{{!item.hasInShoppingCart}}' data-hi='{{item.shoppingCartNum}}'
+                  data-sindex='{{index}}'>{{item.shoppingCartNum}}</view>
+              <image src='../../images/common/icon_addcart.png'               
+                  class='product_list_item_specification_item_add_and_sub_img' bindtap='addNum' data-id='{{item.id}}' 
+                  data-hi='{{item.shoppingCartNum}}' data-sindex='{{index}}'></image>
+            </view>
+            <view class='product_list_item_specification_item_insert_subscribeStock' wx:else data-id='{{item.id}}'
+                  bindtap='insertSubscribeStock' >加入到货通知</view>
+          </view>
+        </view>
+      </block>
+      <!-- 商品详情 -->
+      <view class='product_detail_title'>商品详情</view>
+      <view class='product_detail'>品牌：{{productData.brandName==null?'':productData.brandName}}</view>
+      <view class='product_detail'>厂名：{{productData.factoryName==null?'':productData.factoryName}}</view>
+      <view class='product_detail'>存储方法：{{productData.saveMethod}}</view>
+      <view class='product_detail'>保质期：{{productData.qualityGuaranteePeriod}}天</view>
+      <view class='product_detail_order'>备注：{{productData.remark}}</view>
+      <view class='product_detail' style='height:160rpx;'></view>
+  </scroll-view>
+
+  <!-- 底部加入购物车 -->
+  <view class='bottom_shopping_cart'>
+    <text class='totalPrice_str'>总价：</text>
+    <text class='totalPrice'>￥{{totalPrice}}</text>
+    <view class='go_to_shoppingCart_str' bindtap='goToShoppingCart'>去购物车</view>
+  </view>
+  <view class='shopping_cart_img_view' bindtap='goToShoppingCart'>
+    <image src="{{(totalNum > 0 || totalNum) ? shoppingCartImg : shoppingCartImgEmpty}}" class='shopping_cart_img'></image>
+    <text class='shopping_cart_num' hidden='{{totalNum <= 0}}'>{{totalNum}}</text>
+  </view>
+  
+</view>

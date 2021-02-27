@@ -1,0 +1,58 @@
+<view class="page" style='background-color:#E8F1FA'>
+  <loading hidden="{{toastStatus}}">
+    加载中....
+  </loading>
+  <modal wx:if="{{showQuantityModal}}" class='update-quantity-modal-view' bindcancel="modalCancel" bindconfirm='modalConfirm'>
+    <view class='update-quantity-title-view'>请输入退货数量</view>
+    <input value='{{currentSelectedProduct.chooseRefundNum}}' type="number" maxlength='3' class='update-quantity-input' bindinput ="quantityInput"></input>
+  </modal> 
+  <scroll-view scroll-y='true' class='scroll_view'>
+    <block wx:for='{{orderData}}' wx:key='{{item.id}}'>
+      <!-- 商品信息 -->
+        <view class='product-content-view'>
+          <view class='select-btn-view' bindtap='changeSelectStatus' data-index="{{index}}">
+            <image wx:if='{{!item.isSelected}}' src='../../images/shoppingCart/shopcart_unselect.png' class='select-item-image'></image>
+            <image wx:if='{{item.isSelected}}' src='../../images/shoppingCart/shopcart_selected.png' class='select-item-image'></image>
+          </view>
+          <view class='product-image-view'>
+            <image src="{{item.productPreviewImageURL==''?'../../images/order/img_loading.jpg':item.productPreviewImageURL}}" class='product-image'></image>
+          </view>
+          <view class='product-info-view'>
+            <text class='specificationName-text'>{{item.productName}}</text>
+            <text class='brandName-text'>{{item.specificationName}}</text>
+            <view style='display: flex;align-content: center;flex-direction: row;'>
+              <text class='price-text'>￥{{item.specificationUnitPrice}}元</text>
+              <text style='color:#333333;font-size:14px'>x{{item.purchasedNum}}{{item.unit}}</text>
+            </view>
+            <view class='update-quantity-wrap-view'>
+              <view class='add-quantity-view' bindtap='minus' data-item='{{item}}' data-index="{{index}}">-</view>
+              <view class='quantity-view' bindtap='update' data-item='{{item}}' data-index="{{index}}">{{item.chooseRefundNum}}</view>
+              <view class='minus-quantity-view' bindtap='add' data-item='{{item}}' data-index="{{index}}">+</view> 
+            </view>
+          </view>
+        </view>
+        <view class='common-five-separator common-zero-margin-top'></view>
+    </block>
+  </scroll-view>
+  <!-- 底部结算相关信息 -->
+  <view class='common-separator' style='position:fixed;bottom:45px;'></view>
+  <view class='selected-product-info-wrap-view'>
+    <view class='select-all-image-wrap-view' bindtap='selectAll'>
+      <image wx:if='{{!isSelectAll}}' src='../../images/shoppingCart/shopcart_unselect.png' class='select-all-image'></image>
+      <image wx:if='{{isSelectAll}}' src='../../images/shoppingCart/shopcart_selected.png' class='select-all-image'></image>
+    </view>
+    <view class='selected-total-info-view'>
+      <view class='select-all-text-view'>
+        <text>全选</text>
+      </view>
+      <view class='selected-total-price-view'>
+        <text>合计:</text>
+        <text class='selected-total-price-text'>{{totalPrice}}元</text>
+      </view>
+    </view>
+    <view class='order-view' catchtap='goToExchange'>
+      <text class='order-text'>申请退货</text>
+    </view>
+  </view>
+</view>
+

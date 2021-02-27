@@ -1,0 +1,16 @@
+<view class='page' style='background-color:#E8F1FA'>
+<!-- 302 × 292 -->
+  <image src='../../../images/user/about_logo.png' class='img' style='height:{{logoH}};'></image>
+  <view class='version-view'><text class='version-text'>版本号 1.0.0</text></view>
+  <view class='introduction-view'>
+    <text class='introduction-text'>
+      冻品云是“食材配送＋互联网”的B2B平台，通过建立线上、线下高效便捷的供应链，压缩食材流通的层级，减少中间环节的损耗，帮助餐饮商家解决采购难题，打造一站式冻品采购服务。
+    </text>
+  </view>
+  <view class='introduction-view' style='margin-left:5%;margin-top:-16px'>
+    <text class='introduction-text'>
+      在海南冻品行业规模第一公司“商业基因”的影响下，依托深耕海南食品行业二十余载、占据冻品市场半壁江山的龙头企业为线下实体，拥有数量可观的稳定客户以及规模化的供给。
+    </text>
+  </view>
+  <image src='../../../images/user/about_qrcode.png' class='img' style='height:{{qrH}};'></image>
+</view>

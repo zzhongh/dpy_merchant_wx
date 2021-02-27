@@ -1,0 +1,51 @@
+<view class='page' style='background-color:#E8F1FA'>
+  <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading>
+  <!-- 红包列表 -->
+  <view class="" wx:if='{{redPacketList.length>0}}'>
+    <scroll-view scroll-y="true" style='background-color:#E8F1FA'>  
+      <block wx:for="{{redPacketList}}" wx:for-item="value" wx:key="{{redPacketList}}">
+        <view class='item-wrap-view' bindtap='selectedRedPacket' data-index='{{index}}'>
+          <!-- 图片 -->
+          <view class='item-type-view'>
+            <image class='item-type-image' src='../../images/user/redpacket_unuse.png'></image>
+          </view>
+          <!-- 内容 -->
+          <view class='item-type-content-view'>
+            <view class='redPacket-type-and-amount-wrap-view'>
+              <view class='redPacket-type-wrap-view'>
+                <text wx:if="{{value.comeFromType=='0'}}" class='redPacket-type-title-text'>积分兑换</text>
+                <text wx:if="{{value.comeFromType=='1'}}" class='redPacket-type-title-text'>推荐奖励</text>
+                <text wx:if="{{value.comeFromType=='2'}}" class='redPacket-type-title-text'>会员特权</text>
+                <text wx:if="{{value.comeFromType=='3'}}" class='redPacket-type-title-text'>订单退款</text>
+                <text wx:if="{{value.comeFromType=='4'}}" class='redPacket-type-title-text'>系统派发</text>
+                <text wx:if="{{value.comeFromType=='5'}}" class='redPacket-type-title-text'>活动红包</text>
+              </view>
+              <text class='item-type-content-title'>{{value.amount}}元红包</text>
+            </view>
+            <text class='item-type-content-date'>满{{value.amountCondition}}可使用</text>
+            <text wx:if="{{value.expiryDateFlag=='0'}}" class='item-type-content-date'>有效期：{{value.expiryDate}}</text>
+            <text wx:if="{{value.expiryDateFlag=='1'}}" class='item-type-content-date'>有效期：永久有效</text>
+          </view>
+          <!-- 图片 -->
+          <!-- <view class='item-type-view'>
+            <image class='item-type-image' src=''></image>
+          </view> -->
+        </view>
+        <view class='common-separator common-zero-margin-top'></view>
+      </block>
+      <view class="weui-loadmore weui-loadmore_line" bindtap="loadMore" >
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">{{isLoadedAllAuditDataText}}</view>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 列表为空时 -->
+  <view class='list-is-empty-view' wx:if='{{redPacketList.length==0}}'>
+    <image class='item-type-image' src='../../images/user/usefulRedpacket.png'></image>
+    <text class='list-is-empty-view-text'>您还没有可使用的红包哦</text>
+    <view class='go-to-exchange-btn-view' bindtap='goToExchange'>
+      <text class='go-to-exchange-btn-text'>去兑换</text>
+    </view>
+  </view>
+</view>

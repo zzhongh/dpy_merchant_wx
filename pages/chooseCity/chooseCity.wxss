@@ -1,0 +1,55 @@
+.content{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.province_item{
+  width: 100%;
+  margin-top: 20rpx;
+}
+.province_name{
+  font-size: 35rpx;
+  color: #219ff7;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-left: 20rpx;
+}
+.city_name{
+  font-size: 28rpx;
+  border: 1rpx solid rgb(219, 218, 218);
+  border-radius: 10rpx;
+  height: 79rpx;
+  line-height: 79rpx;
+  text-align: center;
+  width: 20%;
+  margin-left: 3%;
+
+}
+.city_name_selected{
+  font-size: 28rpx;
+  color: #219ff7;
+  border: 1rpx solid #219ff7;
+  border-radius: 10rpx;
+  height: 79rpx;
+  line-height: 79rpx;
+  text-align: center;
+  width: 20%;
+  margin-left: 3%;
+}
+.space{
+  width: 100%;
+  height: 1rpx;
+  float: top;
+}
+.line{
+  height: 0.5rpx;
+  background-color: rgba(202, 199, 199, 0.904)
+}
+.city_item{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 20rpx;
+}

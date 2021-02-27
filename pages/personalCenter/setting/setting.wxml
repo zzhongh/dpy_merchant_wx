@@ -1,0 +1,28 @@
+<view class='page' style='background-color:#E8F1FA'>
+  <scroll-view scroll-y="true">
+    <!-- 服务指南 --> 
+    <view class='item-wrap-view' bindtap='resetPayPassword'>
+      <text class='item-tite-text'>重置支付密码</text>
+      <image src='../../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='item-wrap-view' bindtap='goToSetPayWithoutPassword'>
+      <text class='item-tite-text'>免密支付</text>
+      <image src='../../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='item-wrap-view' bindtap='aboutUs'>
+      <text class='item-tite-text'>关于我们</text>
+      <image src='../../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <!-- <view class='item-wrap-view'>
+      <text class='item-tite-text'>切换环境</text>
+      <image src='../../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+    </view> -->
+    <!-- 退出登录 -->
+    <view class='logout-btn-view' bindtap='logout'>
+      <text class='logout-btn-text'>退出当前账号</text>
+    </view>
+  </scroll-view>
+</view>

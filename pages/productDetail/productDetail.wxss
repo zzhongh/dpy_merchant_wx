@@ -1,0 +1,218 @@
+.content{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #F4F5F7;
+}
+.banner_img{
+  height: 100%;
+  width: 100%;
+}
+
+.swiper_box{
+  width: 100%;
+  height: 600rpx;
+}
+.product_name_and_collect{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  background-color: white;
+}
+.product_name{
+  font-weight:bold;
+  font-size: 30rpx;
+}
+.product_collect{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+}
+.product_collect_img{
+  height: 55rpx;
+  width: 55rpx;
+}
+.product_collect_str{
+  font-size: 22rpx;
+}
+.product_list_item_specification_item{
+  display: flex;
+  flex-direction: column;
+  width: 98%;
+  height: 100rpx;
+  padding: 10rpx;
+  margin-top: 2rpx;
+  background-color: white;
+}
+.product_list_item_specification_item_price_and_num{
+  height: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.product_list_item_specification_item_price{
+  font-size: 28rpx;
+  color: #ff4242;
+  font-weight:bold;
+}
+.product_list_item_specification_item_price_none{
+  font-size: 28rpx;
+  color: #8e8e8e;
+  font-weight:bold;
+}
+.product_list_item_specification_item_unit{
+  font-size: 28rpx;
+}
+.product_list_item_specification_item_cart_num{
+  display: flex;
+  flex-direction: row;
+  margin-right: 10rpx;
+  align-items: center;
+}
+.product_list_item_specification_item_input{
+  width: 100rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+  border: 1rpx solid #eeeeee;
+  text-align: center;
+}
+.product_list_item_specification_item_add_and_sub_img{
+  width: 50rpx;
+  height: 50rpx;
+}
+.product_detail_title{
+  height: 80rpx;
+  font-weight:bold;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  margin-left: 10rpx;
+}
+.product_detail{
+  height: 80rpx;
+  line-height: 80rpx;
+  padding-left: 10rpx;
+  font-size: 28rpx;
+  background-color: white;
+  margin-bottom: 2rpx;
+}
+.product_detail_order{
+  line-height: 50rpx;
+  padding: 10rpx;
+  font-size: 28rpx;
+  background-color: white;
+  margin-bottom: 2rpx;
+}
+.bottom_shopping_cart{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 90rpx;
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  bottom: 0;
+  border-top: 1rpx solid #eeeeee;
+}
+.shopping_cart_img_view{
+  height: 100rpx;
+  width: 100rpx;
+  position: fixed;
+  bottom: 20rpx;
+  left: 20rpx;
+}
+.shopping_cart_img{
+  height: 100rpx;
+  width: 100rpx;
+}
+.shopping_cart_num{
+  height: 30rpx;
+  position: fixed;
+  bottom: 70rpx;
+  left: 80rpx;
+  font-size: 25rpx;
+  background-color: #ff4242;
+  padding:6rpx 10rpx 6rpx 10rpx;
+  border-radius: 30rpx;
+  line-height: 30rpx;
+  color: white;
+}
+.totalPrice_str{
+  font-size: 28rpx;
+}
+.totalPrice{
+  font-size: 28rpx;
+  color: #ff4242;
+  margin-right: 10rpx;
+}
+.go_to_shoppingCart_str{
+  width: 200rpx;
+  height: 90rpx;
+  background-color: #33B3ED;
+  color: white;
+  font-size: 33rpx;
+  line-height: 90rpx;
+  text-align: center;
+}
+.product_list_item_specification_item{
+  display: flex;
+  flex-direction: column;
+  width: 98%;
+  height: 100rpx;
+  padding: 10rpx;
+  margin-top: 2rpx;
+  background-color: white;
+}
+.product_list_item_specification_item_name{
+  height: 40%;
+  align-content: center;
+  font-size: 28rpx;
+}
+.product_list_item_specification_item_name_none{
+  height: 40%;
+  align-content: center;
+  font-size: 28rpx;
+  color: #8e8e8e
+}
+.product_list_item_specification_item_unit_none{
+  font-size: 28rpx;
+  color: #8e8e8e;
+}
+.product_list_item_specification_item_insert_subscribeStock{
+  display: flex;
+  flex-direction: row;
+  margin-right: 10rpx;
+  color: white;
+  background-color: #fe8954;
+  border-radius: 5rpx;
+  font-size: 25rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+.update-quantity-modal-view{
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+.update-quantity-input{
+  width:80px;
+  height:30px;
+  margin-top:8px;
+  text-align:center;
+  margin-left:33%;
+  border: 1rpx solid #eeeeee;
+}
+.update-quantity-title-view{
+  width:100%;
+  text-align: center
+}

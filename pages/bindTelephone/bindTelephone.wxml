@@ -1,0 +1,25 @@
+<view class='page'>
+  <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading>
+  <view class='item-wrap-view'>
+    <view class='item-type-wrap-view'>
+      <text class='item-type-text'>手机号</text>
+    </view>
+    <input class='item-type-input' maxlength='11' type='number' placeholder="请输入您要绑定的手机号" bindinput='telephoneInput'></input>
+  </view>
+  <view class='common-separator common-zero-margin-top'></view>
+  <view class='item-wrap-view'>
+    <view class='item-type-wrap-view' style='width:40%'>
+      <text class='item-type-text'>验证码</text>
+    </view>
+    <input class='item-type-input' maxlength='6' bindinput='msgCodeInput' placeholder="请输入验证码" type='number'></input>
+    <view class='get-message-code-btn-view' bindtap='getVerificationCode'>
+      <text class='get-message-code-btn-text'>{{time}}</text>
+    </view>
+  </view>
+  <view class='common-separator common-zero-margin-top'></view>
+  <view class='submit-btn-view' bindtap='submit'>
+    <text class='submit-btn-text'>完成</text>
+  </view>
+</view>

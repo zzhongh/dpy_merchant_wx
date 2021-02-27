@@ -1,0 +1,170 @@
+<!--pages/personalCenter/personalCenter.wxml-->
+<view class='page'>
+  <loading hidden="{{toastStatus}}">
+    加载中...
+  </loading>
+  
+  <scroll-view scroll-y="true">
+    <view class='wx_pay_modal_box' wx:if='{{isShowWxModal}}'>
+      <view class='wx_pay_modal_content'>
+        <view class='wx_pay_modal_title'>温馨提示</view>
+        <view class='wx_pay_modal_title'>状态已过期，请重新登录</view>
+        <view class='wx_pay_modal_buttoms'>
+          <!-- <view class='wx_pay_modal_left_buttom' bindtap='modalCancel'>未支付</view> -->
+          <view class='wx_pay_modal_right_buttom' bindtap='modalConfirm'>确定</view>
+        </view>
+      </view>
+    </view>
+    <!-- 顶部 -->
+    <view class='user-header-wrapView'>
+      <!-- <view class='user-header-top-view'>
+        <view class='user-header-city-wrap-view' bindtap='goToSetting'>
+          <image src='../../images/common/setting.png' class='message_img'></image>
+        </view>
+        <view class='user-header-search-wrap-view'></view>
+        <view class='user-header-message-view'>
+          <view>
+            <image src='../../images/common/message-center.png' class='message_img'></image>
+          </view> -->
+          <!-- 红点提示 -->
+          <!-- <view wx:if='{{unreadCountIsShow}}' class='user-header-message-point-view'></view>
+        </view> -->
+        <view class='user-header-top-view'>
+        <view class='user-header-city-wrap-view' >
+          <!-- <image src='../../images/common/message-center.png' class='message_img'></image> -->
+        </view>
+        <view class='user-header-search-wrap-view'></view>
+        <view class='user-header-message-view' bindtap='goToSetting'>
+          <view>
+            <image src='../../images/common/setting.png' class='message_img'></image>
+          </view>
+        </view>
+      </view>
+
+      <view class='user-header-info-view'>
+        <image wx:if="{{relatedData.merchant.wxHeadImgURL == '' || relatedData.merchant.wxHeadImgURL == null}}" src='../../images/user/user-head.png' class='header-user-image'></image>
+        <image wx:if="{{relatedData.merchant.wxHeadImgURL != '' && relatedData.merchant.wxHeadImgURL != null}}" src='{{relatedData.merchant.wxHeadImgURL}}' class='header-user-image'></image>
+        <view class='header-user-info'> 
+          <view style='display: flex;flex-direction: row;'>
+            <text class='white-text-color'>{{telephone}}</text>
+            <image wx:if='{{relatedData.merchant.qualificationStatus == 0}}' src='../../images/common/uncertificated.png' class='qualificationStatus-image'></image>
+            <image wx:if='{{relatedData.merchant.qualificationStatus == 1}}' src='../../images/common/auth_success.png' class='qualificationStatus-image'></image>
+            <image wx:if='{{relatedData.merchant.qualificationStatus == 2}}' src='../../images/common/auth_wait.png' class='qualificationStatus-image'></image>
+            <image wx:if='{{relatedData.merchant.qualificationStatus == 3}}' src='../../images/common/auth_failed.png' class='qualificationStatus-image'></image>
+          </view>
+          <image src='{{relatedData.levelImageUrl}}' style='width:80px;height:20px;margin-top:3px'></image>
+        </view>
+      </view>
+    </view>
+
+    <!-- 订单 -->
+    <view class='all-orders-wrap-view' bindtap='toOrderList' data-hi='0'>
+      <image src='../../images/user/all-orders.png' class='item-image-view'></image>
+      <text class='item-tite-text'>我的订单</text>
+      <text class='item-right-text' style='z-index:-1' wx:if='{{isShowWxModal}}'>查看全部订单</text>
+      <text class='item-right-text' wx:if='{{!isShowWxModal}}'>查看全部订单</text>
+      <image src='../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='orders-wrap-view'>
+      <!-- 待付款 -->
+      <view class='orders-item-wrap-view'  bindtap='toOrderList' data-hi='1'>
+        <image src="../../images/user/unpaid.png" class='common-image-size'></image>
+        <view class='top-text-wrap-view'>待付款</view>
+        <!-- 数量 -->
+        <view wx:if='{{relatedData.list.unpaid!=0}}' class='total-hint-view'>
+          <text class='hint-text'>{{relatedData.list.unpaid}}</text>
+        </view>
+      </view>
+      
+      <!-- 待收货 -->
+      <view class='orders-item-wrap-view' bindtap='toOrderList' data-hi='2'>
+        <image src="../../images/user/unrecieved.png" class='common-image-size'></image>
+        <view class='top-text-wrap-view'>待收货</view>
+        <!-- 数量 -->
+        <view wx:if='{{relatedData.list.undeliveredUniteUnreceived!=0}}' class='total-hint-view'>
+          <text class='hint-text'>{{relatedData.list.undeliveredUniteUnreceived}}</text>
+        </view>
+      </view>
+      
+      <!-- 待评价 -->
+      <view class='orders-item-wrap-view' bindtap='toOrderList' data-hi='3'>
+        <image src="../../images/user/unevaluate.png" class='common-image-size'></image>
+        <view class='top-text-wrap-view'>待评价</view>
+        <!-- 数量 -->
+        <view wx:if='{{relatedData.list.unevaluated!=0}}' class='total-hint-view'>
+          <text class='hint-text'>{{relatedData.list.unevaluated}}</text>
+        </view>
+      </view>
+      
+      <!-- 售后 -->
+      <view class='orders-item-wrap-view' bindtap='toOrderList' data-hi='4'>
+        <image src="../../images/user/aftersales.png" class='common-image-size'></image>
+        <view class='top-text-wrap-view'>售后</view>
+        <!-- 数量 -->
+        <view wx:if='{{relatedData.list.afterSaleService!=0}}' class='total-hint-view'>
+          <text class='hint-text'>{{relatedData.list.afterSaleService}}</text> 
+        </view>
+      </view>
+      
+    </view>
+    <view class='common-five-separator common-zero-margin-top'></view>
+    <!-- 我的钱包 -->
+    <view class='wallet-wrap-view' bindtap='goToTransactionRecords'>
+      <image src='../../images/user/wallet.png' class='item-image-view'></image>
+      <text class='item-tite-text'>我的钱包</text>
+      <text class='item-right-text' style='z-index:-1' wx:if='{{isShowWxModal}}'>查看交易明细</text>
+      <text class='item-right-text' wx:if='{{!isShowWxModal}}'>查看交易明细</text>
+      <image src='../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='wallet-content-view'> 
+      <view class='balance-wrap-view'>
+        <text style='font-size:12px;'>余额(元)</text>
+        <text style='font-size:16px;margin-left:5px'>{{relatedData.balance}}</text>
+      </view>
+      <view class='recharge-wrap-view' bindtap='goToRechargeRules' data-balance='{{relatedData.balance}}'>
+        <image src='../../images/user/recharge.png' style='width:70%;height:{{rechargeImgHeight}};margin-left:30px;margin-top:-6px;'></image>
+      </view>
+    </view>
+    <view class='common-five-separator common-zero-margin-top;'></view>
+    <!-- 服务指南 --> 
+    <view class='service-item-wrap-view' bindtap='calling'>
+      <image src='../../images/user/call-service.png' class='service-item-image-view'></image>
+      <text class='service-item-tite-text'>客服电话</text>
+      <image src='../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='service-item-wrap-view' bindtap='goToAfterSaleServiceView'>
+      <image src='../../images/user/rules.png' class='service-item-image-view'></image>
+      <text class='service-item-tite-text'>售后规则</text>
+      <image src='../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='service-item-wrap-view' bindtap='goToCollectionProducts'>
+      <image src='../../images/user/ofenbuy.png' class='service-item-image-view'></image>
+      <text class='service-item-tite-text'>常购清单</text>
+      <image src='../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='service-item-wrap-view' bindtap='goToDeliveryAdressView'>
+      <image src='../../images/user/address.png' class='service-item-image-view'></image>
+      <text class='service-item-tite-text'>配送地址</text>
+      <image src='../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='service-item-wrap-view' bindtap='goToPointExchange' data-points='{{relatedData.merchant.points}}'>
+      <image src='../../images/user/point.png' class='service-item-image-view'></image>
+      <text class='service-item-tite-text'>积分兑换</text>
+      <image src='../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='service-item-wrap-view' bindtap='goToMyRedPacket'>
+      <image src='../../images/user/redpacket.png' class='service-item-image-view'></image>
+      <text class='service-item-tite-text'>我的红包</text>
+      <image src='../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+
+  </scroll-view>
+</view>

@@ -1,0 +1,2 @@
+<!--pages/personalCenter/webView/webView.wxml-->
+<web-view src="{{url}}"></web-view>

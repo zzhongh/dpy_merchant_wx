@@ -1,0 +1,44 @@
+<view class='page' style='background-color:#E8F1FA'>
+  <scroll-view>
+    <view class='item-wrap-view'>
+      <view class='item-type-wrap-view'>
+        <text class='item-type-text'>店铺名</text>
+      </view>
+      <input class='item-type-input' placeholder='店铺名称' value='{{addressInfo.merchantName}}' bindinput='merchantNameInput'>
+      
+      </input>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='item-wrap-view'>
+      <view class='item-type-wrap-view'>
+        <text class='item-type-text'>收件人</text>
+      </view>
+      <input class='item-type-input' placeholder='收件人姓名' value='{{addressInfo.consigneeName}}' bindinput='consigneeNameInput'></input>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='item-wrap-view'>
+      <view class='item-type-wrap-view'>
+        <text class='item-type-text'>联系方式</text>
+      </view>
+      <input class='item-type-input' placeholder='收件人联系方式' value='{{addressInfo.consigneeTelephone}}' bindinput='consigneeTelephoneInput' type='number' maxlength='11'></input>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='item-wrap-view' bindtap='chooseArea'>
+      <view class='choose-address-item-view'>
+        <text wx:if="{{selectedProvinceName==''}}" class='item-type-text'>省、市、区</text>
+        <text wx:if="{{selectedProvinceName!=''}}" class='item-type-text'>{{selectedProvinceName}}、{{selectedCityName}}、{{selectedDistrictName}}、{{selectedStreetName}}</text>
+      </view>
+      <view class='choose-available-area'>
+        <image src='../../../images/common/back-arrow-right-gray.png' class='common-arrow-right-image'></image>
+      </view>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='address-description-wrap-view'>
+      <textarea placeholder='请输入详细地址'  value='{{addressInfo.consigneeAddress}}' class='address-description-textarea' bindinput='descriptionInput'></textarea>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='save-button-view' bindtap='saveAddress'>
+      <text style='color:white;'>保存</text>
+    </view>
+  </scroll-view>
+</view>

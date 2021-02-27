@@ -1,0 +1,33 @@
+<view class='page' style='background-color:#E8F1FA'>
+<scroll-view>
+    <view style='width:100%;height:{{bannerH}}'>
+      <image src='../../../images/user/rechargeRules-banner.jpg' class='banner-image'></image>
+    </view>
+    <view class='balance-info-wrap-view'>
+      <text class='common-text'>您的当前余额为</text>
+      <text class='balance-text'>{{balance}}</text>
+      <text class='common-text'>元</text>
+    </view>
+    <view class='recharge-input-wrap-view'>
+      <view class='recharge-input-content-view'>
+        <input class='recharge-input' placeholder=' 请输入充值金额' type='number' bindinput='rechargePrice'>
+        </input>
+        <view class='recharge-btn-view' bindtap='goToRechargePay' data-rechargePrice='{{rechargePrice}}' data-type='input'>
+          <text class='recharge-btn-text'>立即充值</text>
+        </view>
+      </view>
+    </view>
+    <view class='rules-wrap-view'> 
+      <block wx:for='{{rechargeRules}}'  wx:key="{{rechargeRules}}">
+        <view class='rules-item' style='height:{{itemH}};' wx:if="{{item}}" bindtap='goToRechargePay' data-type='choose' data-rechargePrice='{{item.payablePrice}}'>
+          <image class='img' style='width:82%;height:{{itemH}}' src='{{item.previewImageUrl}}'></image>
+        </view>
+      </block>
+    </view>
+    <view class='common-separator common-zero-margin-top'></view>
+    <view class='recharge-notice-wrap-view'>
+      <!-- <view style='width:10px;height:10px;border-radius:5px;background-color:red'></view> -->
+      <text class='recharge-notice-text'>{{rechargeNotice}}</text>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,81 @@
+/* pages/personalCenter/rechargeSuccess/rechargeSuccess.wxss */
+.success-info-view{
+  width:100%;
+  height:170px;
+  background-color:white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.success-image{
+  width:79px;
+  height:102.4px
+}
+.success-text{
+  color:#333333;
+  font-size:16px;
+  text-align: center
+}
+.payable-price{
+  color:red;
+  font-size:17px;
+  text-align: center
+}
+.payMethod-view{
+  width:100%;
+  height:40px;
+  margin-top:6px;
+  background-color:white;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  line-height:40px
+}
+.payMethod-title{
+  color:#666666;
+  font-size:14px;
+  text-align:center;
+  margin-left:6px
+}
+.payMethod-text{
+  color:#333333;
+  font-size:14px;
+  text-align:center;
+  position:absolute;
+  right:6px
+}
+.buttons-wrap-view{
+  width:90%;
+  height:42px;
+  margin-top:12px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  line-height:45px;
+  margin-left:5%
+}
+.to-home-button-view{
+  width:45%;
+  height:100%;
+  margin-right:10%;
+  background-color:#219ff7;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+.to-home-button-text{
+  color:white;
+  font-size:14px
+}
+.to-person-button-view{
+  width:45%;
+  height:100%;
+  background-color:white;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+.to-person-button-text{
+  color:#333333;
+  font-size:14px
+}
